@@ -1,0 +1,98 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <!-- Anti-FOUC: apply theme before render -->
+    <script is:inline>
+      (function() {
+        var t = localStorage.getItem("toulibre-theme");
+        var dark = t === "dark" || (t !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (dark) document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Toulibre" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL("/og-image.png", Astro.site)} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Toulibre" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@toulibre" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL("/og-image.png", Astro.site)} />
+
+    <!-- JSON-LD -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Toulibre",
+      "url": "https://toulibre.org",
+      "logo": "https://toulibre.org/static/img/logo_toulibre.svg",
+      "description": "Association de promotion du Logiciel Libre et de la culture libre en Occitanie",
+      "foundingDate": "2006",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "14 avenue Aristide Briand",
+        "addressLocality": "Toulouse",
+        "postalCode": "31400",
+        "addressCountry": "FR"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "general"
+      },
+      "sameAs": [
+        "https://x.com/toulibre",
+        "https://bsky.app/profile/toulibre.org",
+        "https://linkedin.com/company/toulibre",
+        "https://github.com/toulibre",
+        "https://www.meetup.com/toulouse-logiciel-libre/"
+      ],
+      "memberOf": {
+        "@type": "Organization",
+        "name": "APRIL"
+      }
+    })} />
+  </head>
+  <body class="min-h-screen antialiased">
+    <a
+      href="#main-content"
+      class="fixed left-2 top-2 z-[100] -translate-y-full rounded-lg bg-orange px-4 py-2 font-heading text-sm font-semibold text-black transition-transform focus:translate-y-0"
+    >
+      Aller au contenu principal
+    </a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

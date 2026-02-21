@@ -1,0 +1,81 @@
+---
+/**
+ * Cycles through: system → light → dark → system
+ * Icons: monitor (system), sun (light), moon (dark)
+ */
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  class="flex h-8 w-8 items-center justify-center rounded-lg text-white/60 transition-colors hover:bg-white/10 hover:text-orange"
+  aria-label="Changer le thème"
+  title="Changer le thème"
+>
+  <!-- System icon -->
+  <svg data-icon="system" class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect width="20" height="14" x="2" y="3" rx="2" />
+    <line x1="8" x2="16" y1="21" y2="21" />
+    <line x1="12" x2="12" y1="17" y2="21" />
+  </svg>
+  <!-- Light icon -->
+  <svg data-icon="light" class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2" /><path d="M12 20v2" />
+    <path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" />
+    <path d="M2 12h2" /><path d="M20 12h2" />
+    <path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />
+  </svg>
+  <!-- Dark icon -->
+  <svg data-icon="dark" class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+  </svg>
+</button>
+
+<script>
+  type Theme = "system" | "light" | "dark";
+  const STORAGE_KEY = "toulibre-theme";
+  const order: Theme[] = ["system", "light", "dark"];
+
+  function getStoredTheme(): Theme {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === "light" || stored === "dark") return stored;
+    return "system";
+  }
+
+  function resolveTheme(pref: Theme): "light" | "dark" {
+    if (pref === "system") {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    return pref;
+  }
+
+  function applyTheme(pref: Theme) {
+    const resolved = resolveTheme(pref);
+    document.documentElement.classList.toggle("dark", resolved === "dark");
+
+    // Update icons
+    document.querySelectorAll("[data-icon]").forEach((el) => {
+      el.classList.toggle("hidden", el.getAttribute("data-icon") !== pref);
+    });
+  }
+
+  // Init
+  const current = getStoredTheme();
+  applyTheme(current);
+
+  // Toggle button
+  document.querySelector("[data-theme-toggle]")?.addEventListener("click", () => {
+    const cur = getStoredTheme();
+    const next = order[(order.indexOf(cur) + 1) % order.length];
+    localStorage.setItem(STORAGE_KEY, next);
+    applyTheme(next);
+  });
+
+  // Listen for system theme changes
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+    if (getStoredTheme() === "system") {
+      applyTheme("system");
+    }
+  });
+</script>

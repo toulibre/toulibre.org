@@ -1,0 +1,42 @@
+---
+interface Props {
+  id: string;
+  title?: string;
+  subtitle?: string;
+  class?: string;
+  dark?: boolean;
+}
+
+const { id, title, subtitle, class: className = "", dark = false } = Astro.props;
+---
+
+<section
+  id={id}
+  class:list={[
+    "px-4 py-16 md:py-24",
+    dark ? "bg-black text-white" : "",
+    className,
+  ]}
+  aria-labelledby={title ? `${id}-heading` : undefined}
+>
+  <div class="mx-auto max-w-6xl">
+    {
+      title && (
+        <div class="mb-12 text-center">
+          <h2
+            id={`${id}-heading`}
+            class="font-heading text-3xl font-semibold md:text-4xl"
+          >
+            {title}
+          </h2>
+          {subtitle && (
+            <p class:list={["mx-auto mt-4 max-w-2xl text-lg", dark ? "text-white/70" : "text-content/60"]}>
+              {subtitle}
+            </p>
+          )}
+        </div>
+      )
+    }
+    <slot />
+  </div>
+</section>

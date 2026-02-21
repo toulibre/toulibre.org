@@ -1,0 +1,98 @@
+[
+  {
+    "title": "QJeLT — Repas mensuel de mars",
+    "date": "2026-03-12T19:30:00",
+    "endDate": "2026-03-12T22:30:00",
+    "location": "Restaurant La Paniolade, Toulouse",
+    "description": "Que Justice et Logiciel libre soient faits à Toulouse ! Retrouvez-nous pour notre repas mensuel convivial, ouvert à toutes et tous : membres, curieux·ses, passionné·e·s du libre. Venez discuter, échanger et partager un bon moment autour d'un repas.",
+    "type": "qjelt"
+  },
+  {
+    "title": "Permanence d'aide et d'installation GNU/Linux",
+    "date": "2026-03-21T14:00:00",
+    "endDate": "2026-03-21T18:00:00",
+    "location": "Médiathèque José Cabanis, Toulouse",
+    "description": "Besoin d'aide pour installer GNU/Linux ou un logiciel libre ? Nos bénévoles sont là pour vous accompagner. Apportez votre ordinateur, on s'occupe du reste ! En partenariat avec les communautés Wikipédia et OpenStreetMap.",
+    "type": "dropIn"
+  },
+  {
+    "title": "Atelier Blender — Modélisation 3D",
+    "date": "2026-03-28T14:00:00",
+    "endDate": "2026-03-28T17:00:00",
+    "location": "Fablab Artilect, Toulouse",
+    "description": "Atelier mensuel animé par le Blender User Group Toulousain. Ce mois-ci : initiation à la modélisation 3D organique. Ouvert à tous les niveaux, apportez votre ordinateur portable.",
+    "type": "workshop"
+  },
+  {
+    "title": "QJeLT — Repas mensuel d'avril",
+    "date": "2026-04-09T19:30:00",
+    "endDate": "2026-04-09T22:30:00",
+    "location": "Restaurant La Paniolade, Toulouse",
+    "description": "Notre rendez-vous mensuel autour d'un repas pour échanger sur le logiciel libre, les projets en cours et les prochains événements de l'association.",
+    "type": "qjelt"
+  },
+  {
+    "title": "Libre en Fête — Projection « Le Monde selon Tux »",
+    "date": "2026-04-18T20:00:00",
+    "endDate": "2026-04-18T22:30:00",
+    "location": "Cinéma Utopia, Toulouse",
+    "description": "Dans le cadre du Libre en Fête, projection suivie d'un débat autour du documentaire sur la culture libre et ses enjeux. Entrée libre.",
+    "type": "screening"
+  },
+  {
+    "title": "QJeLT — Repas mensuel de février",
+    "date": "2026-02-12T19:30:00",
+    "endDate": "2026-02-12T22:30:00",
+    "location": "Restaurant La Paniolade, Toulouse",
+    "description": "Notre rendez-vous mensuel autour d'un repas pour échanger sur le logiciel libre, les projets en cours et les prochains événements de l'association.",
+    "type": "qjelt"
+  },
+  {
+    "title": "Permanence d'aide et d'installation GNU/Linux",
+    "date": "2026-01-17T14:00:00",
+    "endDate": "2026-01-17T18:00:00",
+    "location": "Médiathèque José Cabanis, Toulouse",
+    "description": "Nos bénévoles vous accompagnent pour installer GNU/Linux ou un logiciel libre sur votre ordinateur. En partenariat avec les communautés Wikipédia et OpenStreetMap.",
+    "type": "dropIn"
+  },
+  {
+    "title": "QJeLT — Repas mensuel de janvier",
+    "date": "2026-01-08T19:30:00",
+    "endDate": "2026-01-08T22:30:00",
+    "location": "Restaurant La Paniolade, Toulouse",
+    "description": "Premier QJeLT de l'année ! Venez partager vos bonnes résolutions libristes autour d'un repas convivial.",
+    "type": "qjelt"
+  },
+  {
+    "title": "Capitole du Libre 2025",
+    "date": "2025-11-15T09:00:00",
+    "endDate": "2025-11-16T18:00:00",
+    "location": "INP-ENSEEIHT, Toulouse",
+    "description": "La 13e édition du Capitole du Libre : deux jours de conférences, ateliers et rencontres autour du logiciel libre et de la culture libre. Plus de 100 conférences et 20 ateliers.",
+    "type": "conference"
+  },
+  {
+    "title": "QJeLT — Repas mensuel de décembre",
+    "date": "2025-12-11T19:30:00",
+    "endDate": "2025-12-11T22:30:00",
+    "location": "Restaurant La Paniolade, Toulouse",
+    "description": "Dernier QJeLT de l'année, l'occasion de faire le bilan et de préparer 2026 ensemble.",
+    "type": "qjelt"
+  },
+  {
+    "title": "Atelier Blender — Animation",
+    "date": "2025-10-25T14:00:00",
+    "endDate": "2025-10-25T17:00:00",
+    "location": "Fablab Artilect, Toulouse",
+    "description": "Atelier mensuel du Blender User Group Toulousain consacré à l'animation de personnages. Ouvert à tous les niveaux.",
+    "type": "workshop"
+  },
+  {
+    "title": "Permanence d'aide et d'installation GNU/Linux",
+    "date": "2025-09-20T14:00:00",
+    "endDate": "2025-09-20T18:00:00",
+    "location": "Médiathèque José Cabanis, Toulouse",
+    "description": "Permanence de rentrée ! Venez avec votre ordinateur, nos bénévoles vous aident à installer et configurer GNU/Linux et des logiciels libres.",
+    "type": "dropIn"
+  }
+]

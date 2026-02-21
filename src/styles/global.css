@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors (fixed) */
+  --color-orange: #F5A623;
+  --color-yellow: #FFC84A;
+  --color-brown: #8B4513;
+  --color-black: #1A1A1A;
+  --color-white: #FFFFFF;
+  --color-cream: #FFE0A0;
+
+  /* Semantic colors (theme-adaptive) */
+  --color-page: var(--theme-page);
+  --color-page-alt: var(--theme-page-alt);
+  --color-content: var(--theme-content);
+  --color-card: var(--theme-card);
+
+  /* Typography */
+  --font-heading: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+/* Light theme (default) */
+:root {
+  --theme-page: #FFFFFF;
+  --theme-page-alt: #FFF6E5;
+  --theme-content: #1A1A1A;
+  --theme-card: #FFFFFF;
+}
+
+/* Dark theme */
+:root.dark {
+  --theme-page: #111111;
+  --theme-page-alt: #191919;
+  --theme-content: #E5E5E5;
+  --theme-card: #1C1C1C;
+}
+
+/* Google Fonts */
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/spacegrotesk/v16/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/inter/v18/UcCo3FwrK3iLTcviYwY.woff2")
+    format("woff2");
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-content);
+  background-color: var(--color-page);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+}
+
+/* Scroll margin for anchored sections */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* Animation keyframes */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out both;
+}

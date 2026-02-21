@@ -1,0 +1,203 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ToulibreName from "../components/ToulibreName.astro";
+import ObfuscatedEmail from "../components/ObfuscatedEmail.astro";
+
+const title = "Adhésion — Toulibre";
+const description = "Rejoignez l'association Toulibre ! Adhésion à partir de 10 €, de date à date. Soutenez la promotion du Logiciel Libre en Occitanie.";
+---
+
+<Layout title={title} description={description}>
+  <article class="mx-auto max-w-3xl px-4 pb-16 pt-32">
+    <a
+      href="/"
+      class="mb-8 inline-flex items-center gap-1 text-sm text-content/50 transition-colors hover:text-orange"
+    >
+      <svg
+        class="h-4 w-4"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="m12 19-7-7 7-7"></path>
+        <path d="M19 12H5"></path>
+      </svg>
+      Retour à l'accueil
+    </a>
+
+    <h1 class="font-heading text-4xl font-bold text-content">Adhérer à <ToulibreName /></h1>
+    <p class="mt-4 text-lg text-content/60">
+      Soutenez la promotion du Logiciel Libre en Occitanie en rejoignant l'association.
+    </p>
+
+    <div class="mt-12 space-y-8">
+      <!-- Why join -->
+      <section>
+        <h2 class="font-heading text-2xl font-semibold text-content">Pourquoi adhérer ?</h2>
+        <p class="mt-3 leading-relaxed text-content/80">
+          L'adhésion à <ToulibreName /> n'est <strong>pas obligatoire</strong> pour
+          participer à nos événements. Toutes nos activités restent ouvertes à tous·tes,
+          membres ou non. Cependant, adhérer c'est :
+        </p>
+        <ul class="mt-4 space-y-3" role="list">
+          {
+            [
+              { icon: "heart", text: "Soutenir concrètement la promotion du Logiciel Libre en Occitanie" },
+              { icon: "users", text: "Participer aux décisions de l'association (assemblée générale, votes)" },
+              { icon: "calendar", text: "Contribuer à l'organisation d'événements comme le Capitole du Libre" },
+              { icon: "star", text: "Rejoindre une communauté de passionné·e·s du libre à Toulouse" },
+            ].map((item) => (
+              <li class="flex gap-3 rounded-xl border border-content/5 bg-page-alt p-4">
+                <svg
+                  class="mt-0.5 h-5 w-5 shrink-0 text-orange"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  {item.icon === "heart" && <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />}
+                  {item.icon === "users" && <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></>}
+                  {item.icon === "calendar" && <><rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /></>}
+                  {item.icon === "star" && <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />}
+                </svg>
+                <span class="text-content/80">{item.text}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <!-- Payment details -->
+      <section class="rounded-2xl border border-orange/30 bg-orange/5 p-8">
+        <h2 class="font-heading text-2xl font-semibold text-content">Modalités</h2>
+        <div class="mt-4 space-y-4 text-content/80">
+          <div class="flex items-start gap-4">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange text-black">
+              <span class="font-heading text-lg font-bold">10€</span>
+            </div>
+            <div>
+              <p class="font-heading font-semibold text-content">Cotisation annuelle</p>
+              <p class="mt-1 text-sm text-content/60">
+                10 € minimum, de date à date (votre adhésion est valable un an à
+                compter du jour du paiement).
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-card text-orange">
+              <svg
+                class="h-6 w-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect width="20" height="14" x="2" y="5" rx="2" />
+                <line x1="2" x2="22" y1="10" y2="10" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-heading font-semibold text-content">Moyens de paiement</p>
+              <p class="mt-1 text-sm text-content/60">
+                Par chèque à l'ordre de « Toulibre », en espèces lors d'un événement,
+                ou par virement bancaire. Contactez-nous pour obtenir les coordonnées
+                bancaires.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-card text-orange">
+              <svg
+                class="h-6 w-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-heading font-semibold text-content">Statuts de l'association</p>
+              <p class="mt-1 text-sm text-content/60">
+                Consultez les
+                <a
+                  href="/static/pdf/statuts-association-toulibre.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-orange underline decoration-orange/30 transition-colors hover:text-brown"
+                >statuts de l'association (PDF)</a>
+                pour connaître les droits et devoirs des membres.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How to help -->
+      <section>
+        <h2 class="font-heading text-2xl font-semibold text-content">Pas prêt·e à adhérer ? Vous pouvez quand même aider !</h2>
+        <p class="mt-3 leading-relaxed text-content/80">
+          L'adhésion n'est pas la seule manière de soutenir <ToulibreName />.
+          Voici d'autres façons de contribuer :
+        </p>
+        <ul class="mt-4 space-y-2 text-content/70" role="list">
+          {
+            [
+              `Participer à la préparation des événements en rejoignant la liste <a href="https://toulibre.org/mailman/listinfo/toulibre-orga/" target="_blank" rel="noopener noreferrer" class="text-orange underline decoration-orange/30 hover:text-brown">toulibre-orga</a>`,
+              "Proposer une conférence ou un atelier au Capitole du Libre",
+              "Aider lors des permanences d'installation GNU/Linux",
+              "Parler du Logiciel Libre autour de vous",
+            ].map((item) => (
+              <li class="flex gap-2">
+                <svg
+                  class="mt-1 h-4 w-4 shrink-0 text-orange"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+                <span set:html={item} />
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <!-- CTA -->
+      <div class="rounded-2xl bg-black p-8 text-center">
+        <h2 class="font-heading text-2xl font-semibold text-white">Prêt·e à rejoindre l'aventure ?</h2>
+        <p class="mt-3 text-white/60">
+          Contactez-nous pour adhérer ou pour toute question.
+        </p>
+        <ObfuscatedEmail
+          user="contact"
+          domain="toulibre.org"
+          label="Nous contacter"
+          class="mt-6 inline-flex items-center gap-2 rounded-full bg-orange px-6 py-3 font-heading text-sm font-semibold text-black transition-colors hover:bg-yellow"
+        />
+      </div>
+    </div>
+  </article>
+</Layout>

@@ -1,0 +1,92 @@
+---
+interface Props {
+  title: string;
+  date: string;
+  endDate?: string;
+  location: string;
+  description: string;
+  type: string;
+  url?: string;
+  featured?: boolean;
+}
+
+const { title, date, location, description, type, featured = false } = Astro.props;
+
+const eventDate = new Date(date);
+const day = eventDate.toLocaleDateString("fr-FR", { day: "numeric" });
+const month = eventDate.toLocaleDateString("fr-FR", { month: "short" }).replace(".", "");
+const time = eventDate.toLocaleDateString("fr-FR", {
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}) + " à " + eventDate.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+
+const typeLabels: Record<string, string> = {
+  qjelt: "QJeLT",
+  dropIn: "Permanence",
+  workshop: "Atelier",
+  screening: "Projection",
+  conference: "Conférence",
+};
+
+const typeColors: Record<string, string> = {
+  qjelt: "bg-orange/20 text-orange",
+  dropIn: "bg-yellow/30 text-brown",
+  workshop: "bg-cream text-brown",
+  screening: "bg-orange/10 text-orange",
+  conference: "bg-brown/10 text-brown",
+};
+---
+
+<div
+  class:list={[
+    "rounded-2xl border border-content/10 bg-card",
+    featured ? "p-6 md:p-8" : "p-5",
+  ]}
+>
+  <div class="flex gap-4">
+    <!-- Date badge -->
+    <div
+      class="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl bg-black text-white"
+    >
+      <span class:list={["font-heading font-bold leading-none", featured ? "text-xl" : "text-lg"]}>{day}</span>
+      <span class="text-xs uppercase text-white/70">{month}</span>
+    </div>
+
+    <div class="min-w-0 flex-1">
+      <!-- Type badge -->
+      <span
+        class:list={[
+          "mb-2 inline-block rounded-full px-2.5 py-0.5 text-xs font-medium",
+          typeColors[type] || "bg-content/5 text-content",
+        ]}
+      >
+        {typeLabels[type] || type}
+      </span>
+
+      <!-- Title -->
+      <h3
+        class:list={[
+          "font-heading font-semibold text-content",
+          featured ? "text-xl md:text-2xl" : "text-base",
+        ]}
+      >
+        {title}
+      </h3>
+
+      <!-- Time & location -->
+      <p class="mt-1 text-sm text-content/60">
+        <time datetime={date}>{time}</time>
+      </p>
+      <p class="text-sm text-content/60">{location}</p>
+
+      <!-- Description (featured only) -->
+      {
+        featured && (
+          <p class="mt-3 text-sm leading-relaxed text-content/70">{description}</p>
+        )
+      }
+    </div>
+  </div>
+</div>

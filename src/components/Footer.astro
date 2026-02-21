@@ -1,0 +1,109 @@
+---
+import SocialLinks from "./SocialLinks.astro";
+import ObfuscatedEmail from "./ObfuscatedEmail.astro";
+
+const navLinks = [
+  { href: "/#capitole-du-libre", label: "Capitole du Libre" },
+  { href: "/evenements", label: "Événements" },
+  { href: "/#a-propos", label: "À propos" },
+  { href: "/#communaute", label: "Communauté" },
+  { href: "/association", label: "L'association" },
+  { href: "/adhesion", label: "Adhésion" },
+  { href: "/faq", label: "FAQ" },
+];
+---
+
+<footer class="border-t border-white/10 bg-black px-4 py-12 text-white" role="contentinfo">
+  <div class="mx-auto max-w-6xl">
+    <div class="grid gap-8 md:grid-cols-3">
+      <!-- Logo & description -->
+      <div>
+        <a href="#" class="inline-flex items-center gap-2" aria-label="Toulibre — Accueil">
+          <img
+            src="/static/img/logo_toulibre.svg"
+            alt="Toulibre"
+            class="h-8 w-auto"
+            width="111"
+            height="32"
+          />
+        </a>
+        <p class="mt-3 text-sm text-white/50">
+          Promouvoir, développer et démocratiser le Logiciel Libre en Occitanie.
+        </p>
+        <SocialLinks class="mt-4" />
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <h3 class="font-heading text-sm font-semibold uppercase tracking-wider text-white/40">
+          Navigation
+        </h3>
+        <ul class="mt-3 space-y-2" role="list">
+          {
+            navLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-sm text-white/60 transition-colors hover:text-orange"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Contact & legal -->
+      <div>
+        <h3 class="font-heading text-sm font-semibold uppercase tracking-wider text-white/40">
+          Contact
+        </h3>
+        <ul class="mt-3 space-y-2 text-sm text-white/60" role="list">
+          <li>
+            <ObfuscatedEmail
+              user="contact"
+              domain="toulibre.org"
+              class="transition-colors hover:text-orange"
+            />
+          </li>
+          <li>Association loi 1901</li>
+          <li>14 avenue Aristide Briand, 31400 Toulouse</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div
+      class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/40 md:flex-row"
+    >
+      <p>
+        Contenu sous licence
+        <a
+          href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline transition-colors hover:text-orange"
+        >
+          CC BY-SA 4.0
+        </a>
+      </p>
+      <div class="flex flex-wrap items-center gap-4">
+        <a href="/mentions-legales" class="transition-colors hover:text-orange">
+          Mentions légales
+        </a>
+        <a href="/code-de-conduite" class="transition-colors hover:text-orange">
+          Code de conduite
+        </a>
+        <a
+          href="https://github.com/toulibre"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="transition-colors hover:text-orange"
+        >
+          Code source
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

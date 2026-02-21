@@ -1,0 +1,291 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ToulibreName from "../components/ToulibreName.astro";
+import ObfuscatedEmail from "../components/ObfuscatedEmail.astro";
+
+const title = "L'association — Toulibre";
+const description =
+  "Présentation de l'association Toulibre : histoire, conseil d'administration, statuts, rapports moraux et financiers, assemblées générales.";
+
+const boardMembers = [
+  { name: "Guillaume Gasnier", role: "Président", img: "/static/img/guillaume-g.jpg" },
+  { name: "Pierre Apap", role: "Trésorier", img: "/static/img/pierre-a.jpg" },
+  { name: "Lionel Porcheron", role: "Vice-Président", img: "/static/img/lionel-p.jpg" },
+  { name: "Alexandre Guy", img: "/static/img/alexandre-g.jpg" },
+  { name: "Marc Souviron", img: "/static/img/marc-s.jpg" },
+  { name: "Simon Thoby", img: "/static/img/simon-t.jpg" },
+];
+
+const agReports = [
+  { year: "2023-2024", date: "17 mars 2025", pv: "https://toulibre.org/pub/2025-03-17-ag/PV%20AGO%20Toulibre%202025-03-17.pdf", moral: "https://toulibre.org/pub/2025-03-17-ag/rapport-moral-2023-2024.pdf", financial: "https://toulibre.org/pub/2025-03-17-ag/rapport-financier-2023-2024.pdf" },
+  { year: "2022-2023", date: "28 février 2024", pv: "https://toulibre.org/pub/2024-02-28-ag/PV_AG_2023.pdf", moral: "https://toulibre.org/pub/2024-02-28-ag/rapport-moral-2022-2023.pdf", financial: "https://toulibre.org/pub/2024-02-28-ag/rapport-financier-2022-2023.pdf" },
+  { year: "2021-2022", date: "7 février 2023", pv: "https://toulibre.org/pub/2023-02-07-ag/PV_AG_2022.pdf", moral: "https://toulibre.org/pub/2023-02-07-ag/rapport-moral-2021-2022.pdf", financial: "https://toulibre.org/pub/2023-02-07-ag/rapport-financier-2021-2022.pdf" },
+  { year: "2020-2021", date: "8 décembre 2021", pv: "https://toulibre.org/pub/2021-12-08-ag/PV_AG_2021.pdf", moral: "https://toulibre.org/pub/2021-12-08-ag/rapport-moral-2020-2021.pdf", financial: "https://toulibre.org/pub/2021-12-08-ag/rapport-financier-2020-2021.pdf" },
+  { year: "2019-2020", date: "22 octobre 2020", pv: "https://toulibre.org/pub/2020-10-22-ag/PV_AG_2020.pdf", moral: "https://toulibre.org/pub/2020-10-22-ag/rapport-moral-2019-2020.pdf", financial: "https://toulibre.org/pub/2020-10-22-ag/rapport-financier-2019-2020.pdf" },
+  { year: "2018-2019", date: "10 octobre 2019", pv: "https://toulibre.org/pub/2019-10-10-ag/PV_AG_2019.pdf", moral: "https://toulibre.org/pub/2019-10-10-ag/rapport-moral-2018-2019.pdf", financial: "https://toulibre.org/pub/2019-10-10-ag/rapport-financier-2018-2019.pdf" },
+  { year: "2017-2018", date: "25 septembre 2018", pv: "https://toulibre.org/pub/2018-09-25-ag/PV_AG_2018.pdf", moral: "https://toulibre.org/pub/2018-09-25-ag/rapport-moral-2017-2018.pdf", financial: "https://toulibre.org/pub/2018-09-25-ag/rapport-financier-2017-2018.pdf" },
+  { year: "2016-2017", date: "18 septembre 2017", pv: "https://toulibre.org/pub/2017-09-18-ag/Proc%c3%a8s-Verbal%20AG%202017.pdf", moral: "https://toulibre.org/pub/2017-09-18-ag/rapport-moral-2016-2017.pdf", financial: "https://toulibre.org/pub/2017-09-18-ag/rapport-financier-2016-2017.pdf" },
+  { year: "2015-2016", date: "20 septembre 2016", pv: "https://toulibre.org/pub/2016-09-20-ag/Proc%c3%a8s-Verbal%20AG%202016.pdf", moral: "https://toulibre.org/pub/2016-09-20-ag/rapport-moral-2015-2016.pdf", financial: "https://toulibre.org/pub/2016-09-20-ag/rapport-financier-2015-2016.pdf" },
+  { year: "2014-2015", date: "9 septembre 2015", pv: "https://toulibre.org/pub/2015-09-09-ag/Proc%c3%a8s-Verbal%20AG%202015.pdf", moral: "https://toulibre.org/pub/2015-09-09-ag/rapport-moral-2014-2015.pdf", financial: "https://toulibre.org/pub/2015-09-09-ag/rapport-financier-2014-2015.pdf" },
+  { year: "2013-2014", date: "17 septembre 2014", pv: "https://toulibre.org/pub/2014-09-17-ag/Proc%c3%a8s-Verbal%20AG%202014.pdf", moral: "https://toulibre.org/pub/2014-09-17-ag/rapport-moral-2013-2014.pdf", financial: "https://toulibre.org/pub/2014-09-17-ag/rapport-financier-2013-2014.pdf" },
+  { year: "2012-2013", date: "18 septembre 2013", pv: "https://toulibre.org/pub/2013-09-18-ag/Proc%c3%a8s-Verbal%20AG%202013.pdf", moral: "https://toulibre.org/pub/2013-09-18-ag/rapport-moral-2012-2013.pdf", financial: "https://toulibre.org/pub/2013-09-18-ag/rapport-financier-2012-2013.pdf" },
+  { year: "2011-2012", date: "12 septembre 2012", pv: null, moral: "https://toulibre.org/pub/2012-09-12-ag/rapport-moral-2011-2012.pdf", financial: "https://toulibre.org/pub/2012-09-12-ag/rapport-financier-2011-2012.pdf" },
+  { year: "2010-2011", date: "7 septembre 2011", pv: null, moral: "https://toulibre.org/pub/association/rapport-moral-2010-2011.pdf", financial: "https://toulibre.org/pub/association/rapport-financier-2010-2011.pdf" },
+  { year: "2009-2010", date: "16 septembre 2010", pv: null, moral: "https://toulibre.org/pub/association/rapport-moral-2009-2010.pdf", financial: "https://toulibre.org/pub/association/rapport-financier-2009-2010.pdf" },
+  { year: "2008-2009", date: "9 septembre 2009", pv: null, moral: "https://toulibre.org/pub/association/rapport-moral-2008-2009.pdf", financial: "https://toulibre.org/pub/association/rapport-financier-2008-2009.pdf" },
+  { year: "2007-2008", date: "3 septembre 2008", pv: null, moral: "https://toulibre.org/pub/association/rapport-moral-2007-2008.pdf", financial: "https://toulibre.org/pub/association/rapport-financier-2007-2008.pdf" },
+  { year: "2006-2007", date: "5 septembre 2007", pv: null, moral: "https://toulibre.org/pub/association/rapport-moral-2006-2007.pdf", financial: "https://toulibre.org/pub/association/rapport-financier-2006-2007.pdf" },
+];
+---
+
+<Layout title={title} description={description}>
+  <article class="mx-auto max-w-4xl px-4 pb-16 pt-32">
+    <a
+      href="/"
+      class="mb-8 inline-flex items-center gap-1 text-sm text-content/50 transition-colors hover:text-orange"
+    >
+      <svg
+        class="h-4 w-4"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="m12 19-7-7 7-7"></path>
+        <path d="M19 12H5"></path>
+      </svg>
+      Retour à l'accueil
+    </a>
+
+    <h1 class="font-heading text-4xl font-bold text-content">L'association</h1>
+    <p class="mt-4 text-lg text-content/60">
+      Tout savoir sur <ToulibreName />, de sa création à aujourd'hui.
+    </p>
+
+    <div class="mt-12 space-y-12">
+      <!-- ====== Introduction ====== -->
+      <section>
+        <h2 class="font-heading text-2xl font-semibold text-content">Qui sommes-nous</h2>
+        <div class="mt-4 space-y-3 leading-relaxed text-content/80">
+          <p>
+            <ToulibreName /> est une association d'utilisateur·ice·s et
+            de développeur·se·s de
+            <a
+              href="https://fr.wikipedia.org/wiki/Logiciel_libre"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-orange underline decoration-orange/30 hover:text-brown"
+            >Logiciels Libres</a>
+            de la région toulousaine. Elle a pour objet d'organiser des actions visant à
+            promouvoir, développer et démocratiser les Logiciels Libres en région Occitanie.
+          </p>
+          <p>
+            L'association est également concernée par la promotion des œuvres diffusées
+            sous licence libre, et se place dans une perspective d'<strong>éducation populaire</strong>.
+          </p>
+          <p>
+            <ToulibreName /> organise des événements ouverts à tous·tes : présentations,
+            ateliers, rencontres pour la découverte des Logiciels Libres, aide à l'utilisation
+            et à l'installation. Nos activités sont ouvertes à tous·tes, membres ou non, et
+            les membres sont invité·e·s à proposer de nouvelles activités.
+          </p>
+        </div>
+      </section>
+
+      <!-- ====== Timeline ====== -->
+      <section>
+        <h2 class="font-heading text-2xl font-semibold text-content">Repères historiques</h2>
+        <div class="mt-6 space-y-0">
+          {
+            [
+              { year: "2005", text: "Création de fait de Toulibre par de nouveaux·elles arrivant·e·s dans la région toulousaine, motivé·e·s pour promouvoir le Logiciel Libre" },
+              { year: "2006", text: "Assemblée générale constitutive le 6 septembre. Déclaration en préfecture validée le 21 septembre (association loi 1901)" },
+              { year: "2011", text: "Première édition du Capitole du Libre à l'INP-ENSEEIHT" },
+              { year: "2023", text: "Signature de la charte de laïcité et du contrat d'engagement républicain du conseil départemental de la Haute-Garonne" },
+              { year: "2024", text: "12e édition du Capitole du Libre, plus de 1200 participant·e·s" },
+            ].map((event, i) => (
+              <div class="flex gap-4">
+                <div class="flex flex-col items-center">
+                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange font-heading text-xs font-bold text-black">
+                    {event.year}
+                  </div>
+                  {i < 4 && <div class="h-full w-px bg-orange/20" />}
+                </div>
+                <p class="pb-6 pt-2 text-sm text-content/70">{event.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- ====== Administrative info ====== -->
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-content/10 bg-card p-6">
+          <h3 class="font-heading text-lg font-semibold text-content">Siège social</h3>
+          <p class="mt-2 text-sm text-content/60">
+            Association Toulibre<br />
+            14 avenue Aristide Briand<br />
+            31400 Toulouse
+          </p>
+        </div>
+        <div class="rounded-2xl border border-content/10 bg-card p-6">
+          <h3 class="font-heading text-lg font-semibold text-content">Adhésion</h3>
+          <p class="mt-2 text-sm text-content/60">
+            <strong class="text-content">10 € minimum</strong>, de date à date.
+          </p>
+          <a
+            href="/adhesion"
+            class="mt-3 inline-flex items-center gap-1 text-sm text-orange transition-colors hover:text-brown"
+          >
+            En savoir plus sur l'adhésion
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+        <div class="rounded-2xl border border-content/10 bg-card p-6">
+          <h3 class="font-heading text-lg font-semibold text-content">Statuts</h3>
+          <p class="mt-2 text-sm text-content/60">
+            Les statuts de l'association sont consultables en ligne.
+          </p>
+          <a
+            href="/static/pdf/statuts-association-toulibre.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-3 inline-flex items-center gap-1.5 text-sm text-orange transition-colors hover:text-brown"
+          >
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+            Télécharger les statuts (PDF)
+          </a>
+        </div>
+        <div class="rounded-2xl border border-content/10 bg-card p-6">
+          <h3 class="font-heading text-lg font-semibold text-content">Membre de</h3>
+          <p class="mt-2 text-sm text-content/60">
+            <ToulibreName /> est membre de l'<a
+              href="https://www.april.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-orange underline decoration-orange/30 hover:text-brown"
+            >APRIL</a>, association nationale de promotion et de défense du Logiciel Libre.
+          </p>
+        </div>
+      </section>
+
+      <!-- ====== Board of directors ====== -->
+      <section>
+        <h2 class="font-heading text-2xl font-semibold text-content">Conseil d'administration</h2>
+        <p class="mt-2 text-sm text-content/50">
+          Élu lors de l'assemblée générale du 17 mars 2025.
+        </p>
+        <div class="mt-6 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+          {
+            boardMembers.map((member) => (
+              <div class="flex items-center gap-3 rounded-xl border border-content/10 bg-card p-4">
+                {member.img ? (
+                  <img
+                    src={member.img}
+                    alt={member.name}
+                    class="h-10 w-10 shrink-0 rounded-full object-cover"
+                    width="40"
+                    height="40"
+                  />
+                ) : (
+                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange/15 font-heading text-sm font-bold text-orange">
+                    {member.name.split(" ").map((n) => n[0]).join("")}
+                  </div>
+                )}
+                <div>
+                  <p class="font-heading text-sm font-semibold text-content">{member.name}</p>
+                  {member.role && (
+                    <p class="text-xs text-content/50">{member.role}</p>
+                  )}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- ====== Reports and general meetings ====== -->
+      <section>
+        <h2 class="font-heading text-2xl font-semibold text-content">Assemblées générales et bilans</h2>
+        <p class="mt-2 text-sm text-content/50">
+          Par souci de transparence, tous les comptes-rendus, rapports moraux et financiers
+          sont librement consultables.
+        </p>
+
+        <div class="mt-6 overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead>
+              <tr class="border-b border-content/10">
+                <th class="pb-3 pr-4 font-heading text-xs font-semibold uppercase tracking-wider text-content/40">Exercice</th>
+                <th class="pb-3 pr-4 font-heading text-xs font-semibold uppercase tracking-wider text-content/40">Date AG</th>
+                <th class="pb-3 pr-4 font-heading text-xs font-semibold uppercase tracking-wider text-content/40">Documents</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                agReports.map((report) => (
+                  <tr class="border-b border-content/5">
+                    <td class="py-3 pr-4 font-heading font-medium text-content">{report.year}</td>
+                    <td class="py-3 pr-4 text-content/60">{report.date}</td>
+                    <td class="py-3">
+                      <div class="flex flex-wrap gap-2">
+                        {report.pv && (
+                          <a
+                            href={report.pv}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-1 rounded-md bg-content/5 px-2 py-1 text-xs text-content/70 transition-colors hover:bg-orange/10 hover:text-orange"
+                          >
+                            PV
+                          </a>
+                        )}
+                        <a
+                          href={report.moral}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="inline-flex items-center gap-1 rounded-md bg-content/5 px-2 py-1 text-xs text-content/70 transition-colors hover:bg-orange/10 hover:text-orange"
+                        >
+                          Rapport moral
+                        </a>
+                        <a
+                          href={report.financial}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="inline-flex items-center gap-1 rounded-md bg-content/5 px-2 py-1 text-xs text-content/70 transition-colors hover:bg-orange/10 hover:text-orange"
+                        >
+                          Rapport financier
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ====== Contact ====== -->
+      <section class="rounded-2xl bg-black p-8 text-center">
+        <h2 class="font-heading text-2xl font-semibold text-white">Une question ?</h2>
+        <p class="mt-3 text-white/60">
+          N'hésitez pas à nous contacter pour toute information sur l'association.
+        </p>
+        <ObfuscatedEmail
+          user="contact"
+          domain="toulibre.org"
+          label="Nous contacter"
+          class="mt-6 inline-flex items-center gap-2 rounded-full bg-orange px-6 py-3 font-heading text-sm font-semibold text-black transition-colors hover:bg-yellow"
+        />
+      </section>
+    </div>
+  </article>
+</Layout>

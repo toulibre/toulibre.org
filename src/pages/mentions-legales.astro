@@ -1,0 +1,133 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ObfuscatedEmail from "../components/ObfuscatedEmail.astro";
+
+const title = "Mentions légales — Toulibre";
+const description = "Mentions légales du site toulibre.org, édité par l'association Toulibre.";
+---
+
+<Layout title={title} description={description}>
+  <article class="mx-auto max-w-3xl px-4 pb-16 pt-32">
+    <a
+      href="/"
+      class="mb-8 inline-flex items-center gap-1 text-sm text-content/50 transition-colors hover:text-orange"
+    >
+      <svg
+        class="h-4 w-4"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="m12 19-7-7 7-7"></path>
+        <path d="M19 12H5"></path>
+      </svg>
+      Retour à l'accueil
+    </a>
+
+    <h1 class="font-heading text-4xl font-bold text-content">Mentions légales</h1>
+
+    <div class="mt-10 space-y-8 leading-relaxed text-content/80">
+      <section>
+        <h2 class="font-heading text-xl font-semibold text-content">Éditeur du site</h2>
+        <p class="mt-3">
+          Le site <strong>toulibre.org</strong> est édité par l'association <strong>Toulibre</strong>.
+        </p>
+        <ul class="mt-3 space-y-1 text-sm" role="list">
+          <li>Association régie par la loi du 1er juillet 1901, déclarée le 21 septembre 2006
+            à la préfecture de la Haute-Garonne (31) sous le n° W313002830</li>
+          <li>Siège social : 14 avenue Aristide Briand, 31400 Toulouse</li>
+          <li>Directeur de la publication : Guillaume Gasnier (Président)</li>
+          <li>
+            Contact :
+            <ObfuscatedEmail
+              user="contact"
+              domain="toulibre.org"
+              class="text-orange transition-colors hover:text-brown"
+            />
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-semibold text-content">Hébergement</h2>
+        <p class="mt-3">
+          Ce site est hébergé par l'association <strong>Tetaneutral.net</strong>,
+          fournisseur d'accès à Internet associatif et hébergeur libre
+          (<a
+            href="https://tetaneutral.net"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-orange underline transition-colors hover:text-brown"
+          >tetaneutral.net</a>).
+        </p>
+        <p class="mt-2 text-sm text-content/60">
+          Association tetaneutral.net — c/o Sylvain Revault,
+          7 Impasse René Char, Logement 39, 31600 Lherm
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-semibold text-content">Propriété intellectuelle</h2>
+        <p class="mt-3">
+          Sauf mention contraire, l'ensemble des contenus de ce site (textes, images, illustrations)
+          est mis à disposition sous licence
+          <a
+            href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-orange underline transition-colors hover:text-brown"
+          >Creative Commons Attribution — Partage dans les Mêmes Conditions 4.0 International
+          (CC BY-SA 4.0)</a>.
+        </p>
+        <p class="mt-2">
+          Le logo Toulibre est la propriété de l'association Toulibre.
+        </p>
+        <p class="mt-2">
+          Photo d'en-tête :
+          <a
+            href="https://unsplash.com/fr/photos/personnes-assises-au-bord-du-lac-F4u8Vm7UdgY"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-orange underline transition-colors hover:text-brown"
+          >DAT VO</a> sur Unsplash.
+        </p>
+        <p class="mt-2">
+          Le code source du site est disponible sur
+          <a
+            href="https://github.com/toulibre"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-orange underline transition-colors hover:text-brown"
+          >GitHub</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-semibold text-content">Données personnelles</h2>
+        <p class="mt-3">
+          Ce site ne collecte aucune donnée personnelle. Aucun cookie, aucun traceur,
+          aucun outil d'analyse n'est utilisé.
+        </p>
+        <p class="mt-2">
+          Les événements de l'association sont consultables sur notre
+          <a
+            href="/evenements"
+            class="text-orange underline transition-colors hover:text-brown"
+          >page événements</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-heading text-xl font-semibold text-content">Cookies</h2>
+        <p class="mt-3">
+          Ce site n'utilise aucun cookie, ni de suivi, ni technique. Il fonctionne
+          de manière entièrement statique.
+        </p>
+      </section>
+    </div>
+  </article>
+</Layout>

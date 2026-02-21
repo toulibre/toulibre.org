@@ -1,0 +1,172 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ToulibreName from "../components/ToulibreName.astro";
+import ObfuscatedEmail from "../components/ObfuscatedEmail.astro";
+
+const title = "FAQ — Toulibre";
+const description = "Questions fréquemment posées sur Toulibre, le Logiciel Libre, l'adhésion et comment participer.";
+
+const faqs = [
+  {
+    question: "Qu'est-ce qu'un Logiciel Libre ?",
+    answer: `Issus d'un large mouvement bénévole, les <strong>Logiciels Libres</strong> proposent une vision humaniste de l'outil informatique par le partage du savoir et des connaissances. À l'inverse des logiciels propriétaires couramment utilisés, les Logiciels Libres sont librement <strong>utilisables, copiables, modifiables et diffusables</strong>. Une vaste communauté d'utilisateur·ice·s, de développeur·se·s, de testeur·se·s et de traducteur·ice·s s'est créée au niveau mondial et a permis le développement de plusieurs milliers de logiciels couvrant de très nombreux domaines d'application.`,
+    links: [
+      { label: "En savoir plus sur le Logiciel Libre (APRIL)", url: "https://www.april.org/articles/intro/ll.html" },
+      { label: "Logiciel Libre sur Wikipédia", url: "https://fr.wikipedia.org/wiki/Logiciel_libre" },
+    ],
+  },
+  {
+    question: "J'ai une question sur les Logiciels Libres, comment contacter Toulibre ?",
+    answer: `Qu'elle soit technique ou au sujet du mouvement du Libre, les membres de Toulibre peuvent sans doute vous apporter une réponse. Vous pouvez nous rencontrer de plusieurs façons :`,
+    list: [
+      `Lors d'une de nos <a href="/evenements" class="text-orange underline decoration-orange/30 hover:text-brown">rencontres régulières</a>`,
+      `Sur la liste de discussion <a href="https://toulibre.org/mailman/listinfo/toulouse-ll/" target="_blank" rel="noopener noreferrer" class="text-orange underline decoration-orange/30 hover:text-brown">toulouse-ll</a>`,
+      `Sur IRC, canal <code class="rounded bg-content/5 px-1.5 py-0.5">#toulibre</code> sur <strong>Libera.Chat</strong>`,
+      `Par e-mail à <span class="email-contact-placeholder"></span>`,
+    ],
+  },
+  {
+    question: "Dois-je adhérer à l'association pour participer aux événements ?",
+    answer: `<strong>Non.</strong> Toulibre s'est posé comme principe de base de rendre l'adhésion à l'association entièrement optionnelle. Vous pouvez participer à <strong>toutes les activités</strong> de Toulibre sans être adhérent·e.`,
+  },
+  {
+    question: "Comment adhérer à Toulibre ?",
+    answer: `L'adhésion est de <strong>10 € minimum</strong>, de date à date. Rendez-vous sur notre <a href="/adhesion" class="text-orange underline decoration-orange/30 hover:text-brown">page dédiée à l'adhésion</a> pour en savoir plus.`,
+  },
+  {
+    question: "Comment puis-je aider Toulibre ?",
+    answer: `Vous pouvez aider Toulibre de plusieurs manières :`,
+    list: [
+      `En participant aux différents projets de l'association ou à la préparation des événements`,
+      `En vous abonnant à la liste <a href="https://toulibre.org/mailman/listinfo/toulibre-orga/" target="_blank" rel="noopener noreferrer" class="text-orange underline decoration-orange/30 hover:text-brown">toulibre-orga</a> pour suivre les projets en cours`,
+      `En soutenant financièrement l'association via l'<a href="/adhesion" class="text-orange underline decoration-orange/30 hover:text-brown">adhésion</a>`,
+      `En parlant du Logiciel Libre autour de vous !`,
+    ],
+  },
+  {
+    question: "Quel est le lien entre l'APRIL et Toulibre ?",
+    answer: `L'<a href="https://www.april.org" target="_blank" rel="noopener noreferrer" class="text-orange underline decoration-orange/30 hover:text-brown">APRIL</a>, disposant de plusieurs permanent·e·s, mène des actions d'envergure, notamment en ce qui concerne la défense du Logiciel Libre. Ces actions ne peuvent être menées par une association comme Toulibre, constituée uniquement de bénévoles. D'un autre côté, l'APRIL n'organise pas d'ateliers, de présentations ou d'install parties au niveau local. Les actions de l'APRIL et de Toulibre sont donc <strong>parfaitement complémentaires</strong>. L'association Toulibre est adhérente de l'APRIL en tant que personne morale.`,
+  },
+];
+---
+
+<Layout title={title} description={description}>
+  <article class="mx-auto max-w-3xl px-4 pb-16 pt-32">
+    <a
+      href="/"
+      class="mb-8 inline-flex items-center gap-1 text-sm text-content/50 transition-colors hover:text-orange"
+    >
+      <svg
+        class="h-4 w-4"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="m12 19-7-7 7-7"></path>
+        <path d="M19 12H5"></path>
+      </svg>
+      Retour à l'accueil
+    </a>
+
+    <h1 class="font-heading text-4xl font-bold text-content">Questions fréquentes</h1>
+    <p class="mt-4 text-lg text-content/60">
+      Tout ce que vous avez toujours voulu savoir sur <ToulibreName /> et le Logiciel Libre.
+    </p>
+
+    <div class="mt-12 space-y-6">
+      {
+        faqs.map((faq) => (
+          <details class="group rounded-2xl border border-content/10 bg-card transition-colors open:border-orange/30 open:bg-orange/5">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 font-heading text-lg font-semibold text-content select-none">
+              {faq.question}
+              <svg
+                class="h-5 w-5 shrink-0 text-content/30 transition-transform group-open:rotate-45"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14" />
+                <path d="M5 12h14" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-sm leading-relaxed text-content/70">
+              <p set:html={faq.answer} />
+              {faq.list && (
+                <ul class="mt-3 space-y-1.5" role="list">
+                  {faq.list.map((item) => (
+                    <li class="flex gap-2">
+                      <span class="mt-0.5 text-orange" aria-hidden="true">•</span>
+                      <span set:html={item} />
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {faq.links && (
+                <div class="mt-4 flex flex-wrap gap-3">
+                  {faq.links.map((link) => (
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1 text-sm text-orange transition-colors hover:text-brown"
+                    >
+                      {link.label}
+                      <svg
+                        class="h-3.5 w-3.5"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" x2="21" y1="14" y2="3" />
+                      </svg>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          </details>
+        ))
+      }
+    </div>
+
+    <!-- Hidden email for JS injection into FAQ -->
+    <ObfuscatedEmail
+      user="contact"
+      domain="toulibre.org"
+      class="hidden"
+    />
+  </article>
+</Layout>
+
+<script>
+  // Inject email into the FAQ contact placeholder
+  const link = document.querySelector<HTMLAnchorElement>("a[data-u][data-d]");
+  if (link) {
+    const u = link.dataset.u;
+    const d = link.dataset.d;
+    if (u && d) {
+      const addr = `${u}@${d}`;
+      document.querySelectorAll(".email-contact-placeholder").forEach((el) => {
+        const a = document.createElement("a");
+        a.href = `mailto:${addr}`;
+        a.textContent = addr;
+        a.className = "text-orange underline decoration-orange/30 hover:text-brown";
+        el.replaceWith(a);
+      });
+    }
+  }
+</script>

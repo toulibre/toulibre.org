@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://toulibre.org/sitemap-index.xml

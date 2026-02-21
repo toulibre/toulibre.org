@@ -1,0 +1,38 @@
+---
+interface Props {
+  user: string;
+  domain: string;
+  class?: string;
+  label?: string;
+}
+
+const { user, domain, class: className, label } = Astro.props;
+const id = `email-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<a
+  id={id}
+  href="#"
+  class={className}
+  data-u={user}
+  data-d={domain}
+  role="link"
+  aria-label="Adresse e-mail (activez JavaScript pour la voir)"
+>
+  {label ? label : <slot><span class="email-placeholder">[activer JS]</span></slot>}
+</a>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>("a[data-u][data-d]").forEach((el) => {
+    const u = el.dataset.u;
+    const d = el.dataset.d;
+    if (!u || !d) return;
+    const addr = `${u}@${d}`;
+    el.href = `mailto:${addr}`;
+    // Replace placeholder text if no custom label
+    const placeholder = el.querySelector(".email-placeholder");
+    if (placeholder) {
+      placeholder.textContent = addr;
+    }
+  });
+</script>

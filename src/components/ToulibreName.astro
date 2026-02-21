@@ -1,0 +1,9 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span class={className}><span class="text-brown">Tou</span><span class="text-orange">libre</span></span>
