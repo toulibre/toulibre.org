@@ -2,18 +2,19 @@
 import Layout from "../layouts/Layout.astro";
 import ToulibreName from "../components/ToulibreName.astro";
 import ObfuscatedEmail from "../components/ObfuscatedEmail.astro";
+import Picture from "../components/Picture.astro";
 
 const title = "L'association — Toulibre";
 const description =
   "Présentation de l'association Toulibre : histoire, conseil d'administration, statuts, rapports moraux et financiers, assemblées générales.";
 
 const boardMembers = [
-  { name: "Guillaume Gasnier", role: "Président", img: "/static/img/guillaume-g.jpg" },
-  { name: "Pierre Apap", role: "Trésorier", img: "/static/img/pierre-a.jpg" },
-  { name: "Lionel Porcheron", role: "Vice-Président", img: "/static/img/lionel-p.jpg" },
-  { name: "Alexandre Guy", img: "/static/img/alexandre-g.jpg" },
-  { name: "Marc Souviron", img: "/static/img/marc-s.jpg" },
-  { name: "Simon Thoby", img: "/static/img/simon-t.jpg" },
+  { name: "Guillaume Gasnier", role: "Président", img: "/static/img/guillaume-g.png" },
+  { name: "Pierre Apap", role: "Trésorier", img: "/static/img/pierre-a.png" },
+  { name: "Lionel Porcheron", role: "Vice-Président", img: "/static/img/lionel-p.png" },
+  { name: "Alexandre Guy", img: "/static/img/alexandre-g.png" },
+  { name: "Marc Souviron", img: "/static/img/marc-s.png" },
+  { name: "Simon Thoby", img: "/static/img/simon-t.png" },
 ];
 
 const agReports = [
@@ -188,15 +189,16 @@ const agReports = [
             boardMembers.map((member) => (
               <div class="flex items-center gap-3 rounded-xl border border-content/10 bg-card p-4">
                 {member.img ? (
-                  <img
+                  <Picture
                     src={member.img}
                     alt={member.name}
-                    class="h-10 w-10 shrink-0 rounded-full object-cover"
-                    width="40"
-                    height="40"
+                    class="h-20 w-20 rounded-full object-cover"
+                    pictureClass="shrink-0"
+                    width={80}
+                    height={80}
                   />
                 ) : (
-                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange/15 font-heading text-sm font-bold text-orange">
+                  <div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-orange/15 font-heading text-lg font-bold text-orange">
                     {member.name.split(" ").map((n) => n[0]).join("")}
                   </div>
                 )}

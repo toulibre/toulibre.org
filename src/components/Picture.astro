@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"img"> {
+  src: string;
+  alt: string;
+  pictureClass?: string;
+}
+
+const { src, alt, class: className, pictureClass, ...attrs } = Astro.props;
+
+const base = src.replace(/\.[^.]+$/, "");
+---
+
+<picture class={pictureClass}>
+  <source srcset={`${base}.avif`} type="image/avif" />
+  <source srcset={`${base}.webp`} type="image/webp" />
+  <img
+    src={`${base}.png`}
+    alt={alt}
+    class={className}
+    {...attrs}
+  />
+</picture>

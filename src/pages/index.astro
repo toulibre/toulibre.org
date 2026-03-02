@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
 import EventCard from "../components/EventCard.astro";
 import ToulibreName from "../components/ToulibreName.astro";
+import Picture from "../components/Picture.astro";
 import SocialLinks from "../components/SocialLinks.astro";
 import ObfuscatedEmail from "../components/ObfuscatedEmail.astro";
 import events from "../data/events.json";
@@ -27,11 +28,12 @@ const nextEvents = sortedEvents.slice(1, 3);
     aria-label="Accueil"
   >
     <!-- Background photo -->
-    <img
-      src="/static/img/hero-bg.jpg"
+    <Picture
+      src="/static/img/hero-bg.png"
       alt=""
       aria-hidden="true"
       class="absolute inset-0 h-full w-full object-cover"
+      loading="eager"
     />
     <!-- Dark overlay for readability -->
     <div
