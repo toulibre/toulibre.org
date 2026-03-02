@@ -24,7 +24,6 @@ Toulibre est une association d'éducation populaire qui rassemble utilisateurs e
 ## Contact et communauté
 
 - Email : contact@toulibre.org
-- IRC : #toulibre sur Libera.Chat
 - Listes de diffusion : toulibre-annonces, toulouse-ll, toulibre-orga, capitoledulibre (https://toulibre.org/mailman/listinfo/)
 - Vidéos des éditions passées du Capitole du Libre : https://videos.capitoledulibre.org
 
