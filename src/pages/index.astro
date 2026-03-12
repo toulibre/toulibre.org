@@ -7,6 +7,7 @@ import Picture from "../components/Picture.astro";
 import SocialLinks from "../components/SocialLinks.astro";
 import ObfuscatedEmail from "../components/ObfuscatedEmail.astro";
 import events from "../data/events.json";
+import partners from "../data/partners.json";
 
 const title = "Toulibre — Logiciel Libre en Occitanie";
 const description =
@@ -450,6 +451,38 @@ const nextEvents = sortedEvents.slice(1, 3);
         domain="toulibre.org"
         class="mt-4 inline-flex items-center gap-2 rounded-full border border-orange px-6 py-3 font-heading text-sm font-semibold text-orange transition-colors hover:bg-orange hover:text-black"
       />
+    </div>
+  </Section>
+
+  <!-- ====== PARTENAIRES ====== -->
+  <Section
+    id="partenaires"
+    title="Nos partenaires"
+    subtitle="Merci à nos partenaires qui soutiennent les activités de l'association."
+    class="bg-page-alt"
+  >
+    <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-6">
+      {
+        partners.map((partner) => (
+          <a
+            href={partner.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={partner.description}
+            class="group flex flex-col items-center gap-3 rounded-2xl border border-content/10 bg-card p-4 transition-colors hover:border-orange/30"
+          >
+            <img
+              src={partner.logo}
+              alt={`Logo ${partner.name}`}
+              class="h-16 w-auto object-contain grayscale transition-all group-hover:grayscale-0"
+              loading="lazy"
+            />
+            <span class="text-center text-sm font-medium text-content/70 group-hover:text-orange">
+              {partner.name}
+            </span>
+          </a>
+        ))
+      }
     </div>
   </Section>
 </Layout>

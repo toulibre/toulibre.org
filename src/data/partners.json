@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Bleemeo",
+    "logo": "/static/img/partners/logo-bleemeo.svg",
+    "url": "https://bleemeo.com",
+    "description": "Met à disposition des outils informatiques et infrastructure"
+  },
+  {
+    "name": "Etincelle Coworking",
+    "logo": "/static/img/partners/logo-etincelle-coworking.png",
+    "url": "https://www.etincelle-coworking.com/",
+    "description": "Met à disposition ses espaces de réunion"
+  },
+  {
+    "name": "Scaleway",
+    "logo": "/static/img/partners/logo-scaleway.svg",
+    "url": "https://www.scaleway.com",
+    "description": "Met à disposition de l'infrastructure serveurs"
+  },
+  {
+    "name": "INP-N7",
+    "logo": "/static/img/partners/logo-toulouse-inp-n7.png",
+    "url": "https://www.enseeiht.fr",
+    "description": "Met à disposition ses locaux pour le Capitole du Libre"
+  },
+  {
+    "name": "INP-net / net7",
+    "logo": "/static/img/partners/logo-inp-net.png",
+    "url": "https://inp-net.eu.org",
+    "description": "Met à disposition de l'hébergement"
+  },
+  {
+    "name": "Tetaneutral",
+    "logo": "/static/img/partners/logo-tetaneutral.png",
+    "url": "https://tetaneutral.net",
+    "description": "Met à disposition de l'infrastructure serveurs"
+  }
+]
