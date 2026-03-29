@@ -4,7 +4,7 @@ Site web de l'association **Toulibre**, association loi 1901 de promotion du Log
 
 ## Stack technique
 
-- [Astro 5](https://astro.build/) (SSG)
+- [Astro 6](https://astro.build/) (SSG)
 - [Tailwind CSS 4](https://tailwindcss.com/) (via `@tailwindcss/vite`)
 - TypeScript strict
 - pnpm
@@ -44,7 +44,8 @@ src/
 │   ├── adhesion.astro
 │   ├── faq.astro
 │   ├── code-de-conduite.astro
-│   └── mentions-legales.astro
+│   ├── mentions-legales.astro
+│   └── 404.astro
 └── styles/
     └── global.css    # Tailwind CSS 4 config, polices, animations
 public/
