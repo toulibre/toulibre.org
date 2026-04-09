@@ -34,5 +34,11 @@
     "logo": "/static/img/partners/logo-tetaneutral.png",
     "url": "https://tetaneutral.net",
     "description": "Met à disposition de l'infrastructure serveurs"
+  },
+  {
+    "name": "Toulouse Tech Hub",
+    "logo": "/static/img/partners/logo-toulouse-tech-hub.jpg",
+    "url": "https://toulouse-tech-hub.fr",
+    "description": "Les Communautés Tech Toulousaines"
   }
 ]
