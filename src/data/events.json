@@ -1,98 +1,151 @@
 [
   {
-    "title": "QJeLT — Repas mensuel de mars",
-    "date": "2026-03-12T19:30:00",
-    "endDate": "2026-03-12T22:30:00",
-    "location": "Restaurant La Paniolade, Toulouse",
-    "description": "Que Justice et Logiciel libre soient faits à Toulouse ! Retrouvez-nous pour notre repas mensuel convivial, ouvert à toutes et tous : membres, curieux·ses, passionné·e·s du libre. Venez discuter, échanger et partager un bon moment autour d'un repas.",
-    "type": "qjelt"
+    "title": "Atelier Blender",
+    "date": "2026-06-27T14:00:00",
+    "endDate": "2026-06-27T18:00:00",
+    "location": "Artilect Fablab, 10 Rue Tripière, Toulouse",
+    "description": "Le Blender User Group toulousain, en coopération avec Toulibre, vous donne rendez-vous une fois par mois, dans les locaux d'Artilect Fablab. Ces rencontres sont ouvertes à tous·tes. Des initiations et découvertes de Blender sont possibles. Tout le monde est donc lae bienvenu·e ! L'entrée est libre, et gratuite, aucune inscription obligatoire.",
+    "type": "atelier",
+    "url": "https://toulibre.org/ateliers_blender"
+  },
+  {
+    "title": "Atelier Blender",
+    "date": "2026-05-23T14:00:00",
+    "endDate": "2026-05-23T18:00:00",
+    "location": "Artilect Fablab, 10 Rue Tripière, Toulouse",
+    "description": "Le Blender User Group toulousain, en coopération avec Toulibre, vous donne rendez-vous une fois par mois, dans les locaux d'Artilect Fablab. Ces rencontres sont ouvertes à tous·tes. Des initiations et découvertes de Blender sont possibles. Tout le monde est donc lae bienvenu·e ! L'entrée est libre, et gratuite, aucune inscription obligatoire.",
+    "type": "atelier",
+    "url": "https://toulibre.org/ateliers_blender"
+  },
+  {
+    "title": "Atelier Blender",
+    "date": "2026-04-25T14:00:00",
+    "endDate": "2026-04-25T18:00:00",
+    "location": "Artilect Fablab, 10 Rue Tripière, Toulouse",
+    "description": "Le Blender User Group toulousain, en coopération avec Toulibre, vous donne rendez-vous une fois par mois, dans les locaux d'Artilect Fablab. Ces rencontres sont ouvertes à tous·tes. Des initiations et découvertes de Blender sont possibles. Tout le monde est donc lae bienvenu·e ! L'entrée est libre, et gratuite, aucune inscription obligatoire.",
+    "type": "atelier",
+    "url": "https://toulibre.org/ateliers_blender"
   },
   {
     "title": "Permanence d'aide et d'installation GNU/Linux",
-    "date": "2026-03-21T14:00:00",
-    "endDate": "2026-03-21T18:00:00",
-    "location": "Médiathèque José Cabanis, Toulouse",
-    "description": "Besoin d'aide pour installer GNU/Linux ou un logiciel libre ? Nos bénévoles sont là pour vous accompagner. Apportez votre ordinateur, on s'occupe du reste ! En partenariat avec les communautés Wikipédia et OpenStreetMap.",
-    "type": "dropIn"
-  },
-  {
-    "title": "Atelier Blender — Modélisation 3D",
-    "date": "2026-03-28T14:00:00",
-    "endDate": "2026-03-28T17:00:00",
-    "location": "Fablab Artilect, Toulouse",
-    "description": "Atelier mensuel animé par le Blender User Group Toulousain. Ce mois-ci : initiation à la modélisation 3D organique. Ouvert à tous les niveaux, apportez votre ordinateur portable.",
-    "type": "workshop"
+    "date": "2026-04-11T10:00:00",
+    "endDate": "2026-04-11T18:00:00",
+    "location": "Médiathèque José Cabanis, pôle Actualités, Toulouse",
+    "description": "Toulibre assurera le samedi 11 avril un créneau d'aide et d'installation à GNU/Linux et aux logiciels libres sur le pôle Actualités de la médiathèque José Cabanis. Des bénévoles seront présents de 10h à 18h pour vous accueillir et vous conseiller.",
+    "type": "permanence",
+    "url": "https://metropole.toulouse.fr/agenda/permanence-linux-et-logiciels-libres"
   },
   {
     "title": "QJeLT — Repas mensuel d'avril",
-    "date": "2026-04-09T19:30:00",
-    "endDate": "2026-04-09T22:30:00",
-    "location": "Restaurant La Paniolade, Toulouse",
-    "description": "Notre rendez-vous mensuel autour d'un repas pour échanger sur le logiciel libre, les projets en cours et les prochains événements de l'association.",
-    "type": "qjelt"
+    "date": "2026-04-02T20:30:00",
+    "location": "Restaurant La Paniolade, 146 Boulevard de Suisse, Toulouse",
+    "description": "Toulibre en collaboration avec tetaneutral.net proposent aux sympathisants de se retrouver pour échanger autour du Logiciel Libre et des réseaux libres, discuter de nos projets respectifs et de lancer des initiatives locales. Ce repas est ouvert à tous, amateurs de l'esprit du Libre, débutants ou techniciens chevronnés.",
+    "type": "qjelt",
+    "url": "https://evenements.toulibre.org/event/2026-04-02-qjelt"
   },
   {
-    "title": "Libre en Fête — Projection « Le Monde selon Tux »",
-    "date": "2026-04-18T20:00:00",
-    "endDate": "2026-04-18T22:30:00",
-    "location": "Cinéma Utopia, Toulouse",
-    "description": "Dans le cadre du Libre en Fête, projection suivie d'un débat autour du documentaire sur la culture libre et ses enjeux. Entrée libre.",
-    "type": "screening"
-  },
-  {
-    "title": "QJeLT — Repas mensuel de février",
-    "date": "2026-02-12T19:30:00",
-    "endDate": "2026-02-12T22:30:00",
-    "location": "Restaurant La Paniolade, Toulouse",
-    "description": "Notre rendez-vous mensuel autour d'un repas pour échanger sur le logiciel libre, les projets en cours et les prochains événements de l'association.",
-    "type": "qjelt"
+    "title": "Atelier Blender",
+    "date": "2026-03-28T14:00:00",
+    "endDate": "2026-03-28T18:00:00",
+    "location": "Artilect Fablab, 10 Rue Tripière, Toulouse",
+    "description": "Le Blender User Group toulousain, en coopération avec Toulibre, vous donne rendez-vous une fois par mois, dans les locaux d'Artilect Fablab. Ces rencontres sont ouvertes à tous·tes. Des initiations et découvertes de Blender sont possibles. Tout le monde est donc lae bienvenu·e ! L'entrée est libre, et gratuite, aucune inscription obligatoire.",
+    "type": "atelier",
+    "url": "https://toulibre.org/ateliers_blender"
   },
   {
     "title": "Permanence d'aide et d'installation GNU/Linux",
-    "date": "2026-01-17T14:00:00",
-    "endDate": "2026-01-17T18:00:00",
-    "location": "Médiathèque José Cabanis, Toulouse",
-    "description": "Nos bénévoles vous accompagnent pour installer GNU/Linux ou un logiciel libre sur votre ordinateur. En partenariat avec les communautés Wikipédia et OpenStreetMap.",
-    "type": "dropIn"
+    "date": "2026-02-28T14:00:00",
+    "endDate": "2026-02-28T18:00:00",
+    "location": "Médiathèque José Cabanis, pôle Actualités, Toulouse",
+    "description": "Toulibre assurera le samedi 28 février un créneau d'aide et d'installation à GNU/Linux et aux logiciels libres sur le pôle Actualités de la médiathèque José Cabanis. Des bénévoles seront présents de 14h à 18h pour vous accueillir et vous conseiller. Cette permanence se déroulera en parallèle d'une permanence Wikipédia et Openstreetmap qui débutera également à 14h.",
+    "type": "permanence",
+    "url": "https://metropole.toulouse.fr/agenda/permanence-wikipediaopenstreetmaplogiciels-libres"
   },
   {
-    "title": "QJeLT — Repas mensuel de janvier",
-    "date": "2026-01-08T19:30:00",
-    "endDate": "2026-01-08T22:30:00",
-    "location": "Restaurant La Paniolade, Toulouse",
-    "description": "Premier QJeLT de l'année ! Venez partager vos bonnes résolutions libristes autour d'un repas convivial.",
-    "type": "qjelt"
+    "title": "Atelier Blender",
+    "date": "2026-02-28T14:00:00",
+    "endDate": "2026-02-28T18:00:00",
+    "location": "Artilect Fablab, 10 Rue Tripière, Toulouse",
+    "description": "Le Blender User Group toulousain, en coopération avec Toulibre, vous donne rendez-vous une fois par mois, dans les locaux d'Artilect Fablab. Ces rencontres sont ouvertes à tous·tes. Des initiations et découvertes de Blender sont possibles. Tout le monde est donc lae bienvenu·e ! L'entrée est libre, et gratuite, aucune inscription obligatoire.",
+    "type": "atelier",
+    "url": "https://toulibre.org/ateliers_blender"
+  },
+  {
+    "title": "Permanence d'aide et d'installation GNU/Linux",
+    "date": "2026-01-31T10:00:00",
+    "endDate": "2026-01-31T18:00:00",
+    "location": "Médiathèque José Cabanis, pôle Actualités, Toulouse",
+    "description": "Toulibre assurera le samedi 31 janvier un créneau d'aide et d'installation à Linux et aux logiciels libres sur le pôle Actualités de la médiathèque José Cabanis. Des bénévoles seront présents de 10h à 18h pour vous accueillir et vous conseiller. Cette permanence se déroulera en parallèle d'une permanence Wikipédia et Openstreetmap qui débutera à 14h.",
+    "type": "permanence",
+    "url": "https://metropole.toulouse.fr/agenda/permanence-wikipedia-et-openstreetmap-venez-decouvrir-et-enrichir-ces-deux-outils-collaboratifs-0"
+  },
+  {
+    "title": "Atelier Blender",
+    "date": "2026-01-24T14:00:00",
+    "endDate": "2026-01-24T18:00:00",
+    "location": "Artilect Fablab, 10 Rue Tripière, Toulouse",
+    "description": "Le Blender User Group toulousain, en coopération avec Toulibre, vous donne rendez-vous une fois par mois, dans les locaux d'Artilect Fablab. Ces rencontres sont ouvertes à tous·tes. Des initiations et découvertes de Blender sont possibles. Tout le monde est donc lae bienvenu·e ! L'entrée est libre, et gratuite, aucune inscription obligatoire.",
+    "type": "atelier",
+    "url": "https://toulibre.org/ateliers_blender"
+  },
+  {
+    "title": "Permanence d'aide et d'installation GNU/Linux",
+    "date": "2025-12-13T10:00:00",
+    "endDate": "2025-12-13T18:00:00",
+    "location": "Médiathèque José Cabanis, pôle Actualités, Toulouse",
+    "description": "Toulibre assurera le samedi 13 décembre un créneau d'aide et d'installation à Linux et aux logiciels libres sur le pôle Actualités de la médiathèque José Cabanis. Des bénévoles seront présents de 10h à 18h pour vous accueillir et vous conseiller.",
+    "type": "permanence",
+    "url": "https://metropole.toulouse.fr/agenda/permanence-daide-et-dinstallation-linux-et-aux-logiciels-libres-0"
   },
   {
     "title": "Capitole du Libre 2025",
     "date": "2025-11-15T09:00:00",
     "endDate": "2025-11-16T18:00:00",
     "location": "INP-ENSEEIHT, Toulouse",
-    "description": "La 13e édition du Capitole du Libre : deux jours de conférences, ateliers et rencontres autour du logiciel libre et de la culture libre. Plus de 100 conférences et 20 ateliers.",
-    "type": "conference"
+    "description": "Week-end dédié au logiciel libre à travers plus de 100 conférences, et plus de 20 ateliers pour les expert·e·s et le grand public. L'évènement a accueilli 1200 participant·e·s en 2024. L'évènement est ouvert à tous sur inscription en ligne gratuite préalable !",
+    "type": "conference",
+    "url": "https://capitoledulibre.org/"
   },
   {
-    "title": "QJeLT — Repas mensuel de décembre",
-    "date": "2025-12-11T19:30:00",
-    "endDate": "2025-12-11T22:30:00",
-    "location": "Restaurant La Paniolade, Toulouse",
-    "description": "Dernier QJeLT de l'année, l'occasion de faire le bilan et de préparer 2026 ensemble.",
-    "type": "qjelt"
-  },
-  {
-    "title": "Atelier Blender — Animation",
-    "date": "2025-10-25T14:00:00",
-    "endDate": "2025-10-25T17:00:00",
-    "location": "Fablab Artilect, Toulouse",
-    "description": "Atelier mensuel du Blender User Group Toulousain consacré à l'animation de personnages. Ouvert à tous les niveaux.",
-    "type": "workshop"
-  },
-  {
-    "title": "Permanence d'aide et d'installation GNU/Linux",
-    "date": "2025-09-20T14:00:00",
-    "endDate": "2025-09-20T18:00:00",
+    "title": "Journée Libre en Bib",
+    "date": "2025-10-25T10:00:00",
+    "endDate": "2025-10-25T18:00:00",
     "location": "Médiathèque José Cabanis, Toulouse",
-    "description": "Permanence de rentrée ! Venez avec votre ordinateur, nos bénévoles vous aident à installer et configurer GNU/Linux et des logiciels libres.",
-    "type": "dropIn"
+    "description": "Toulibre sera présente à la médiathèque José Cabanis le samedi 25 octobre de 10h à 18h, pour cette journée, en bibliothèque, consacrée à la culture du libre. Au programme : permanence d'aide et d'installation à Linux et aux logiciels libres, lecture du conte « Ada et Zangemann », permanence Wikipédia et OpenStreetMap de 14h à 18h, et conférence « La possibilité d'un numérique éthique » par Joyce Markoll à 15h.",
+    "type": "permanence",
+    "url": "https://bibliotheque.toulouse.fr/journee-libre-en-bib"
+  },
+  {
+    "title": "Fête des associations 2025",
+    "date": "2025-06-14T10:00:00",
+    "endDate": "2025-06-14T18:00:00",
+    "location": "Place du Capitole, Toulouse",
+    "description": "Toulibre sera présente sur la place du Capitole, samedi 14 juin de 10h à 18h, pour la fête des associations, stand 26. C'est l'occasion de venir discuter logiciels libres mais aussi actions à mettre en place pour la saison prochaine.",
+    "type": "permanence",
+    "url": "https://metropole.toulouse.fr/actualites/fete-des-associations"
+  },
+  {
+    "title": "Projection — Films d'animation du studio Blender",
+    "date": "2025-04-06T10:00:00",
+    "location": "Cinéma Utopia Tournefeuille",
+    "description": "Projection de films d'animation du studio Blender. Projection de « Flow, le chat qui n'avait plus peur de l'eau ». Rencontre et échanges avec des bénévoles. Ces films ont été créés entièrement avec Blender, le logiciel libre de modélisation, d'animation et de rendu 3D.",
+    "type": "projection",
+    "url": "https://www.libre-en-fete.net"
+  },
+  {
+    "title": "Projection — Ailleurs",
+    "date": "2025-04-03T20:30:00",
+    "location": "Cinéma American Cosmograph, Toulouse",
+    "description": "Projection de « Ailleurs ». Rencontre et échanges avec des bénévoles. « Ailleurs » est l'aventure d'un garçon qui, à la suite d'une catastrophe aérienne, se réveille suspendu à un parachute accroché à un arbre. Ce film a été créé entièrement avec Blender, le logiciel libre de modélisation, d'animation et de rendu 3D.",
+    "type": "projection",
+    "url": "https://www.libre-en-fete.net"
+  },
+  {
+    "title": "Projection — Flow, le chat qui n'avait plus peur de l'eau",
+    "date": "2025-03-27T20:00:00",
+    "location": "Cinéma Utopia Borderouge, Toulouse",
+    "description": "Projection de « Flow, le chat qui n'avait plus peur de l'eau ». Rencontre et échanges avec Virginie Guilminot, directrice de production du film, et des bénévoles. « Flow » est le deuxième film d'animation de Gints Zilbalodis. Il propose de suivre un chat, qui trouve refuge sur un bateau occupé par d'autres animaux après une brusque montée des eaux. Ce film a été créé entièrement avec Blender, le logiciel libre de modélisation, d'animation et de rendu 3D.",
+    "type": "projection",
+    "url": "https://www.libre-en-fete.net"
   }
 ]

@@ -10,7 +10,7 @@ interface Props {
   featured?: boolean;
 }
 
-const { title, date, location, description, type, featured = false } = Astro.props;
+const { title, date, location, description, type, url, featured = false } = Astro.props;
 
 const eventDate = new Date(date);
 const day = eventDate.toLocaleDateString("fr-FR", { day: "numeric" });
@@ -24,17 +24,17 @@ const time = eventDate.toLocaleDateString("fr-FR", {
 
 const typeLabels: Record<string, string> = {
   qjelt: "QJeLT",
-  dropIn: "Permanence",
-  workshop: "Atelier",
-  screening: "Projection",
+  permanence: "Permanence",
+  atelier: "Atelier",
+  projection: "Projection",
   conference: "Conférence",
 };
 
 const typeColors: Record<string, string> = {
   qjelt: "bg-orange/20 text-orange",
-  dropIn: "bg-yellow/30 text-brown",
-  workshop: "bg-cream text-brown",
-  screening: "bg-orange/10 text-orange",
+  permanence: "bg-orange/15 text-orange",
+  atelier: "bg-cream text-brown",
+  projection: "bg-orange/10 text-orange",
   conference: "bg-brown/10 text-brown",
 };
 ---
@@ -65,28 +65,37 @@ const typeColors: Record<string, string> = {
         {typeLabels[type] || type}
       </span>
 
-      <!-- Title -->
-      <h3
-        class:list={[
-          "font-heading font-semibold text-content",
-          featured ? "text-xl md:text-2xl" : "text-base",
-        ]}
-      >
-        {title}
-      </h3>
+      <!-- Title + details -->
+      <details class="group">
+        <summary
+          class:list={[
+            "font-heading font-semibold text-content cursor-pointer list-none",
+            featured ? "text-xl md:text-2xl" : "text-base",
+          ]}
+        >
+          <h3 class="inline">
+            {title}
+            <span class="ml-1 inline-block text-content/40 transition-transform group-open:rotate-90">&#9654;</span>
+          </h3>
+        </summary>
+
+        <div class="mt-3 text-sm leading-relaxed text-content/70">
+          <p>{description}</p>
+          {url && (
+            <p class="mt-2">
+              <a href={url} target="_blank" rel="noopener noreferrer" class="font-medium text-orange underline hover:text-orange/80">
+                Voir l'événement &rarr;
+              </a>
+            </p>
+          )}
+        </div>
+      </details>
 
       <!-- Time & location -->
       <p class="mt-1 text-sm text-content/60">
         <time datetime={date}>{time}</time>
       </p>
       <p class="text-sm text-content/60">{location}</p>
-
-      <!-- Description (featured only) -->
-      {
-        featured && (
-          <p class="mt-3 text-sm leading-relaxed text-content/70">{description}</p>
-        )
-      }
     </div>
   </div>
 </div>
