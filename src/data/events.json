@@ -1,5 +1,14 @@
 [
   {
+    "title": "Permanence d'aide et d'installation GNU/Linux",
+    "date": "2026-04-25T10:00:00",
+    "endDate": "2026-04-25T18:00:00",
+    "location": "Médiathèque José Cabanis, pôle Actualités, Toulouse",
+    "description": "Toulibre assurera le samedi 25 avril un créneau d'aide et d'installation à GNU/Linux et aux logiciels libres sur le pôle Actualités de la médiathèque José Cabanis. Des bénévoles seront présents de 10h à 18h pour vous accueillir et vous conseiller.",
+    "type": "permanence",
+    "url": "https://metropole.toulouse.fr/agenda/permanence-wikipedia-openstreetmap-et-logiciels-libres"
+  },
+  {
     "title": "Atelier Blender",
     "date": "2026-06-27T14:00:00",
     "endDate": "2026-06-27T18:00:00",
