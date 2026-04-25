@@ -44,7 +44,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@toulibre" />
+    <meta name="twitter:site" content="@toulibreorg" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL("/og-image.png", Astro.site)} />
@@ -70,10 +70,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         "contactType": "general"
       },
       "sameAs": [
-        "https://x.com/toulibre",
+        "https://x.com/toulibreorg",
         "https://bsky.app/profile/toulibre.org",
+        "https://framapiaf.org/@toulibre",
         "https://linkedin.com/company/toulibre",
         "https://github.com/toulibre",
+        "https://matrix.to/#/#toulibre:capitoledulibre.org",
         "https://www.meetup.com/toulouse-logiciel-libre/"
       ],
       "memberOf": {
