@@ -13,8 +13,15 @@ const title = "Toulibre — Logiciel Libre en Occitanie";
 const description =
   "Toulibre est une association loi 1901 basée à Toulouse qui promeut le Logiciel Libre et la culture libre en Occitanie. Événements, ateliers, conférences et Capitole du Libre.";
 
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
 const sortedEvents = events
-  .filter((e) => new Date(e.date) >= new Date())
+  .filter((e) => {
+    const d = new Date(e.endDate ?? e.date);
+    d.setHours(0, 0, 0, 0);
+    return d >= today;
+  })
   .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
 const featuredEvent = sortedEvents[0];

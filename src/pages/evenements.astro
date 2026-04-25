@@ -7,14 +7,21 @@ const title = "Événements — Toulibre";
 const description =
   "Tous les événements de l'association Toulibre : repas mensuels QJeLT, permanences GNU/Linux, ateliers, conférences et projections autour du logiciel libre à Toulouse.";
 
-const now = new Date();
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const eventDay = (e: { date: string; endDate?: string }) => {
+  const d = new Date(e.endDate ?? e.date);
+  d.setHours(0, 0, 0, 0);
+  return d;
+};
 
 const upcomingEvents = events
-  .filter((e) => new Date(e.date) >= now)
+  .filter((e) => eventDay(e) >= today)
   .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
 const pastEvents = events
-  .filter((e) => new Date(e.date) < now)
+  .filter((e) => eventDay(e) < today)
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 const featuredEvent = upcomingEvents[0];
