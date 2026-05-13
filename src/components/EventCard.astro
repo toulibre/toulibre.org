@@ -10,7 +10,7 @@ interface Props {
   featured?: boolean;
 }
 
-const { title, date, location, description, type, url, featured = false } = Astro.props;
+const { title, date, endDate, location, description, type, url, featured = false } = Astro.props;
 
 const eventDate = new Date(date);
 const day = eventDate.toLocaleDateString("fr-FR", { day: "numeric" });
@@ -40,8 +40,11 @@ const typeColors: Record<string, string> = {
 ---
 
 <div
+  data-event-card
+  data-event-date={date}
+  data-event-end-date={endDate ?? date}
   class:list={[
-    "rounded-2xl border border-content/10 bg-card",
+    "event-card rounded-2xl border border-content/10 bg-card",
     featured ? "p-6 md:p-8" : "p-5",
   ]}
 >
@@ -50,7 +53,7 @@ const typeColors: Record<string, string> = {
     <div
       class="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl bg-black text-white"
     >
-      <span class:list={["font-heading font-bold leading-none", featured ? "text-xl" : "text-lg"]}>{day}</span>
+      <span class:list={["js-event-day font-heading font-bold leading-none", featured ? "text-xl" : "text-lg"]}>{day}</span>
       <span class="text-xs uppercase text-white/70">{month}</span>
     </div>
 
@@ -69,7 +72,7 @@ const typeColors: Record<string, string> = {
       <details class="group">
         <summary
           class:list={[
-            "font-heading font-semibold text-content cursor-pointer list-none",
+            "js-event-title font-heading font-semibold text-content cursor-pointer list-none",
             featured ? "text-xl md:text-2xl" : "text-base",
           ]}
         >

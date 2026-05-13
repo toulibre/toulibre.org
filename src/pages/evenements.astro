@@ -6,26 +6,6 @@ import events from "../data/events.json";
 const title = "Événements — Toulibre";
 const description =
   "Tous les événements de l'association Toulibre : repas mensuels QJeLT, permanences GNU/Linux, ateliers, conférences et projections autour du logiciel libre à Toulouse.";
-
-const today = new Date();
-today.setHours(0, 0, 0, 0);
-
-const eventDay = (e: { date: string; endDate?: string }) => {
-  const d = new Date(e.endDate ?? e.date);
-  d.setHours(0, 0, 0, 0);
-  return d;
-};
-
-const upcomingEvents = events
-  .filter((e) => eventDay(e) >= today)
-  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-
-const pastEvents = events
-  .filter((e) => eventDay(e) < today)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-const featuredEvent = upcomingEvents[0];
-const otherUpcoming = upcomingEvents.slice(1);
 ---
 
 <Layout title={title} description={description}>
@@ -57,50 +37,104 @@ const otherUpcoming = upcomingEvents.slice(1);
       Retrouvez tous nos rendez-vous, passés et à venir, autour du logiciel libre à Toulouse.
     </p>
 
-    <!-- ====== UPCOMING EVENTS ====== -->
-    <section class="mt-12" aria-labelledby="upcoming-heading">
+    <!-- ====== NO-JS FALLBACK: all events visible, unsorted ====== -->
+    <section id="events-fallback" data-nojs class="mt-12" aria-labelledby="fallback-heading">
+      <h2 id="fallback-heading" class="font-heading text-xl font-semibold text-content">
+        Tous les événements
+      </h2>
+      <div id="events-pool" class="mt-6 grid gap-4 md:grid-cols-2">
+        {events.map((event) => <EventCard {...event} />)}
+      </div>
+    </section>
+
+    <!-- ====== JS-ENABLED: upcoming events ====== -->
+    <section id="upcoming-section" class="mt-12" aria-labelledby="upcoming-heading" hidden>
       <h2 id="upcoming-heading" class="font-heading text-xl font-semibold text-content">
         Prochains événements
       </h2>
-
-      {
-        upcomingEvents.length > 0 ? (
-          <div class="mt-6 space-y-4">
-            {featuredEvent && <EventCard {...featuredEvent} featured />}
-            {otherUpcoming.length > 0 && (
-              <div class="grid gap-4 md:grid-cols-2">
-                {otherUpcoming.map((event) => (
-                  <EventCard {...event} />
-                ))}
-              </div>
-            )}
-          </div>
-        ) : (
-          <div class="mt-6 rounded-2xl border border-content/10 bg-page-alt p-8 text-center">
-            <p class="text-content/60">
-              Pas d'événement programmé pour le moment. Suivez-nous sur nos réseaux pour
-              ne rien rater !
-            </p>
-          </div>
-        )
-      }
+      <div id="upcoming-featured-slot" class="mt-6 space-y-4"></div>
+      <div id="upcoming-other-slot" class="mt-4 grid gap-4 md:grid-cols-2"></div>
+      <div id="upcoming-empty" class="mt-6 rounded-2xl border border-content/10 bg-page-alt p-8 text-center" hidden>
+        <p class="text-content/60">
+          Pas d'événement programmé pour le moment. Suivez-nous sur nos réseaux pour
+          ne rien rater !
+        </p>
+      </div>
     </section>
 
-    <!-- ====== PAST EVENTS ====== -->
-    {
-      pastEvents.length > 0 && (
-        <section class="mt-16" aria-labelledby="past-heading">
-          <h2 id="past-heading" class="font-heading text-xl font-semibold text-content">
-            Événements passés
-          </h2>
-          <div class="mt-6 grid gap-4 md:grid-cols-2">
-            {pastEvents.map((event) => (
-              <EventCard {...event} />
-            ))}
-          </div>
-        </section>
-      )
-    }
+    <!-- ====== JS-ENABLED: past events ====== -->
+    <section id="past-section" class="mt-16" aria-labelledby="past-heading" hidden>
+      <h2 id="past-heading" class="font-heading text-xl font-semibold text-content">
+        Événements passés
+      </h2>
+      <div id="past-slot" class="mt-6 grid gap-4 md:grid-cols-2"></div>
+    </section>
 
   </article>
+
+  <script is:inline>
+    (function () {
+      const fallback = document.getElementById("events-fallback");
+      const pool = document.getElementById("events-pool");
+      const upcomingSection = document.getElementById("upcoming-section");
+      const pastSection = document.getElementById("past-section");
+      const featuredSlot = document.getElementById("upcoming-featured-slot");
+      const otherSlot = document.getElementById("upcoming-other-slot");
+      const pastSlot = document.getElementById("past-slot");
+      const emptyMsg = document.getElementById("upcoming-empty");
+
+      if (!pool || !fallback) return;
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const cards = Array.from(pool.querySelectorAll("[data-event-card]"));
+      const upcoming = [];
+      const past = [];
+      for (const card of cards) {
+        const endStr = card.dataset.eventEndDate || card.dataset.eventDate;
+        const end = new Date(endStr);
+        end.setHours(0, 0, 0, 0);
+        (end >= today ? upcoming : past).push(card);
+      }
+      upcoming.sort((a, b) =>
+        new Date(a.dataset.eventDate).getTime() - new Date(b.dataset.eventDate).getTime()
+      );
+      past.sort((a, b) =>
+        new Date(b.dataset.eventDate).getTime() - new Date(a.dataset.eventDate).getTime()
+      );
+
+      function applyFeatured(card) {
+        card.classList.remove("p-5");
+        card.classList.add("p-6", "md:p-8");
+        const day = card.querySelector(".js-event-day");
+        if (day) {
+          day.classList.remove("text-lg");
+          day.classList.add("text-xl");
+        }
+        const title = card.querySelector(".js-event-title");
+        if (title) {
+          title.classList.remove("text-base");
+          title.classList.add("text-xl", "md:text-2xl");
+        }
+      }
+
+      fallback.hidden = true;
+      upcomingSection.hidden = false;
+
+      if (upcoming.length > 0) {
+        const [first, ...rest] = upcoming;
+        applyFeatured(first);
+        featuredSlot.appendChild(first);
+        for (const card of rest) otherSlot.appendChild(card);
+      } else {
+        emptyMsg.hidden = false;
+      }
+
+      if (past.length > 0) {
+        pastSection.hidden = false;
+        for (const card of past) pastSlot.appendChild(card);
+      }
+    })();
+  </script>
 </Layout>

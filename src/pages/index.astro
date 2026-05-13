@@ -12,20 +12,6 @@ import partners from "../data/partners.json";
 const title = "Toulibre — Logiciel Libre en Occitanie";
 const description =
   "Toulibre est une association loi 1901 basée à Toulouse qui promeut le Logiciel Libre et la culture libre en Occitanie. Événements, ateliers, conférences et Capitole du Libre.";
-
-const today = new Date();
-today.setHours(0, 0, 0, 0);
-
-const sortedEvents = events
-  .filter((e) => {
-    const d = new Date(e.endDate ?? e.date);
-    d.setHours(0, 0, 0, 0);
-    return d >= today;
-  })
-  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-
-const featuredEvent = sortedEvents[0];
-const nextEvents = sortedEvents.slice(1, 3);
 ---
 
 <Layout title={title} description={description}>
@@ -222,27 +208,24 @@ const nextEvents = sortedEvents.slice(1, 3);
     title="Prochains événements"
     subtitle="Retrouvez-nous lors de nos prochains rendez-vous, ouverts à toutes et tous."
   >
-    {
-      featuredEvent ? (
-        <div class="space-y-4">
-          <EventCard {...featuredEvent} featured />
-          {nextEvents.length > 0 && (
-            <div class="grid gap-4 md:grid-cols-2">
-              {nextEvents.map((event) => (
-                <EventCard {...event} />
-              ))}
-            </div>
-          )}
-        </div>
-      ) : (
-        <div class="rounded-2xl border border-content/10 bg-page-alt p-8 text-center">
-          <p class="text-content/60">
-            Pas d'événement programmé pour le moment. Suivez-nous sur nos réseaux pour
-            ne rien rater !
-          </p>
-        </div>
-      )
-    }
+    <!-- No-JS fallback: all events visible, unsorted -->
+    <div id="home-events-fallback" data-nojs>
+      <div id="home-events-pool" class="grid gap-4 md:grid-cols-2">
+        {events.map((event) => <EventCard {...event} />)}
+      </div>
+    </div>
+
+    <!-- JS-enabled view -->
+    <div id="home-events-js" hidden>
+      <div id="home-featured-slot" class="space-y-4"></div>
+      <div id="home-other-slot" class="mt-4 grid gap-4 md:grid-cols-2"></div>
+      <div id="home-empty" class="rounded-2xl border border-content/10 bg-page-alt p-8 text-center" hidden>
+        <p class="text-content/60">
+          Pas d'événement programmé pour le moment. Suivez-nous sur nos réseaux pour
+          ne rien rater !
+        </p>
+      </div>
+    </div>
 
     <div class="mt-8 text-center">
       <a
@@ -266,6 +249,62 @@ const nextEvents = sortedEvents.slice(1, 3);
       </a>
     </div>
   </Section>
+
+  <script is:inline>
+    (function () {
+      const fallback = document.getElementById("home-events-fallback");
+      const pool = document.getElementById("home-events-pool");
+      const jsView = document.getElementById("home-events-js");
+      const featuredSlot = document.getElementById("home-featured-slot");
+      const otherSlot = document.getElementById("home-other-slot");
+      const emptyMsg = document.getElementById("home-empty");
+
+      if (!pool || !fallback) return;
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const cards = Array.from(pool.querySelectorAll("[data-event-card]"));
+      const upcoming = [];
+      for (const card of cards) {
+        const endStr = card.dataset.eventEndDate || card.dataset.eventDate;
+        const end = new Date(endStr);
+        end.setHours(0, 0, 0, 0);
+        if (end >= today) upcoming.push(card);
+      }
+      upcoming.sort((a, b) =>
+        new Date(a.dataset.eventDate).getTime() - new Date(b.dataset.eventDate).getTime()
+      );
+
+      function applyFeatured(card) {
+        card.classList.remove("p-5");
+        card.classList.add("p-6", "md:p-8");
+        const day = card.querySelector(".js-event-day");
+        if (day) {
+          day.classList.remove("text-lg");
+          day.classList.add("text-xl");
+        }
+        const title = card.querySelector(".js-event-title");
+        if (title) {
+          title.classList.remove("text-base");
+          title.classList.add("text-xl", "md:text-2xl");
+        }
+      }
+
+      fallback.hidden = true;
+      jsView.hidden = false;
+
+      if (upcoming.length > 0) {
+        const featured = upcoming[0];
+        const next = upcoming.slice(1, 3);
+        applyFeatured(featured);
+        featuredSlot.appendChild(featured);
+        for (const card of next) otherSlot.appendChild(card);
+      } else {
+        emptyMsg.hidden = false;
+      }
+    })();
+  </script>
 
   <!-- ====== ABOUT ====== -->
   <Section

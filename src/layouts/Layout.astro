@@ -15,9 +15,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <!doctype html>
 <html lang="fr">
   <head>
-    <!-- Anti-FOUC: apply theme before render -->
+    <!-- Anti-FOUC: apply theme + flag JS support before render -->
     <script is:inline>
       (function() {
+        document.documentElement.classList.add("js");
         var t = localStorage.getItem("toulibre-theme");
         var dark = t === "dark" || (t !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
         if (dark) document.documentElement.classList.add("dark");
