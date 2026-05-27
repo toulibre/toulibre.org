@@ -12,6 +12,17 @@ interface Props {
 
 const { title, date, endDate, location, description, type, url, featured = false } = Astro.props;
 
+// Stable, shareable slug derived from the title and the date (e.g. "atelier-blender-2026-06-27").
+function slugify(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "") // strip combining diacritical marks
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+const slug = `${slugify(title)}-${date.slice(0, 10)}`;
+
 const eventDate = new Date(date);
 const day = eventDate.toLocaleDateString("fr-FR", { day: "numeric" });
 const month = eventDate.toLocaleDateString("fr-FR", { month: "short" }).replace(".", "");
@@ -40,11 +51,13 @@ const typeColors: Record<string, string> = {
 ---
 
 <div
+  id={slug}
   data-event-card
+  data-event-slug={slug}
   data-event-date={date}
   data-event-end-date={endDate ?? date}
   class:list={[
-    "event-card rounded-2xl border border-content/10 bg-card",
+    "event-card scroll-mt-28 rounded-2xl border border-content/10 bg-card",
     featured ? "p-6 md:p-8" : "p-5",
   ]}
 >
@@ -58,15 +71,47 @@ const typeColors: Record<string, string> = {
     </div>
 
     <div class="min-w-0 flex-1">
-      <!-- Type badge -->
-      <span
-        class:list={[
-          "mb-2 inline-block rounded-full px-2.5 py-0.5 text-xs font-medium",
-          typeColors[type] || "bg-content/5 text-content",
-        ]}
-      >
-        {typeLabels[type] || type}
-      </span>
+      <!-- Type badge + direct link -->
+      <div class="mb-2 flex items-start justify-between gap-2">
+        <span
+          class:list={[
+            "inline-block rounded-full px-2.5 py-0.5 text-xs font-medium",
+            typeColors[type] || "bg-content/5 text-content",
+          ]}
+        >
+          {typeLabels[type] || type}
+        </span>
+
+        <span class="js-event-link-wrap relative shrink-0">
+          <a
+            href={`#${slug}`}
+            class="js-event-link inline-flex h-7 w-7 items-center justify-center rounded-lg text-content/40 transition-colors hover:bg-content/5 hover:text-orange"
+            data-event-slug={slug}
+            aria-label="Mettre en avant cet événement et copier son lien"
+            title="Copier le lien vers cet événement"
+          >
+            <svg
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </a>
+          <span
+            class="js-link-feedback pointer-events-none absolute right-0 top-full z-10 mt-1 whitespace-nowrap rounded-md bg-black px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-200"
+            aria-hidden="true"
+          >
+            Lien copié
+          </span>
+        </span>
+      </div>
 
       <!-- Title + details -->
       <details class="group">

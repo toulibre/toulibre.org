@@ -37,6 +37,36 @@ const description =
       Retrouvez tous nos rendez-vous, passés et à venir, autour du logiciel libre à Toulouse.
     </p>
 
+    <!-- ====== JS-ENABLED: highlighted event (deep link target) ====== -->
+    <section id="highlight-section" class="mt-10 scroll-mt-28" aria-labelledby="highlight-heading" hidden>
+      <div class="flex items-center justify-between gap-2">
+        <h2 id="highlight-heading" class="font-heading text-xl font-semibold text-orange">
+          Événement sélectionné
+        </h2>
+        <button
+          type="button"
+          id="highlight-close"
+          class="inline-flex items-center gap-1 text-sm text-content/50 transition-colors hover:text-orange"
+        >
+          <svg
+            class="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+          Fermer
+        </button>
+      </div>
+      <div id="highlight-slot" class="mt-4"></div>
+    </section>
+
     <!-- ====== NO-JS FALLBACK: all events visible, unsorted ====== -->
     <section id="events-fallback" data-nojs class="mt-12" aria-labelledby="fallback-heading">
       <h2 id="fallback-heading" class="font-heading text-xl font-semibold text-content">
@@ -82,6 +112,9 @@ const description =
       const otherSlot = document.getElementById("upcoming-other-slot");
       const pastSlot = document.getElementById("past-slot");
       const emptyMsg = document.getElementById("upcoming-empty");
+      const highlightSection = document.getElementById("highlight-section");
+      const highlightSlot = document.getElementById("highlight-slot");
+      const highlightClose = document.getElementById("highlight-close");
 
       if (!pool || !fallback) return;
 
@@ -135,6 +168,80 @@ const description =
         pastSection.hidden = false;
         for (const card of past) pastSlot.appendChild(card);
       }
+
+      // ---- Highlight / deep-link handling ----
+      function cardBySlug(slug) {
+        return cards.find((c) => c.dataset.eventSlug === slug);
+      }
+
+      function flashCopied(link) {
+        const wrap = link.closest(".js-event-link-wrap");
+        const fb = wrap && wrap.querySelector(".js-link-feedback");
+        if (!fb) return;
+        fb.classList.remove("opacity-0");
+        fb.classList.add("opacity-100");
+        clearTimeout(fb._timer);
+        fb._timer = setTimeout(() => {
+          fb.classList.remove("opacity-100");
+          fb.classList.add("opacity-0");
+        }, 1500);
+      }
+
+      function bindLinks(root) {
+        for (const link of root.querySelectorAll(".js-event-link")) {
+          if (link.dataset.bound) continue;
+          link.dataset.bound = "1";
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const slug = link.dataset.eventSlug;
+            if (!slug) return;
+            history.replaceState(null, "", "#" + slug);
+            showHighlight(slug, true);
+            const url = location.origin + location.pathname + "#" + slug;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(url).then(() => flashCopied(link)).catch(() => {});
+            }
+          });
+        }
+      }
+
+      function showHighlight(slug, scroll) {
+        const source = cardBySlug(slug);
+        if (!source) return false;
+        const clone = source.cloneNode(true);
+        clone.removeAttribute("id"); // avoid duplicating the source card's id
+        for (const l of clone.querySelectorAll(".js-event-link")) delete l.dataset.bound;
+        applyFeatured(clone);
+        // Make the selected event clearly stand out from the regular cards.
+        clone.classList.remove("border", "border-content/10");
+        clone.classList.add("border-2", "border-orange", "shadow-lg", "shadow-orange/20");
+        const details = clone.querySelector("details");
+        if (details) details.open = true;
+        highlightSlot.replaceChildren(clone);
+        highlightSection.hidden = false;
+        bindLinks(highlightSlot);
+        if (scroll) highlightSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        return true;
+      }
+
+      function clearHighlight() {
+        highlightSlot.replaceChildren();
+        highlightSection.hidden = true;
+        history.replaceState(null, "", location.pathname + location.search);
+      }
+
+      if (highlightClose) highlightClose.addEventListener("click", clearHighlight);
+      bindLinks(document);
+
+      window.addEventListener("hashchange", () => {
+        const slug = decodeURIComponent(location.hash.slice(1));
+        if (slug) showHighlight(slug, true);
+        else clearHighlight();
+      });
+
+      // Open the highlight immediately when arriving with a #slug deep link.
+      const initialSlug = decodeURIComponent(location.hash.slice(1));
+      if (initialSlug) showHighlight(initialSlug, true);
     })();
   </script>
 </Layout>
