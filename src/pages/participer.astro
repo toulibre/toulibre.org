@@ -158,7 +158,11 @@ const description =
           <p class="mt-2 text-sm text-content/70">
             Suivez notre actualité sur vos plateformes préférées.
           </p>
-          <SocialLinks class="mt-3" iconClass="h-5 w-5" />
+          <SocialLinks
+            class="mt-3"
+            iconClass="h-5 w-5"
+            linkClass="text-content/60 transition-colors hover:text-orange"
+          />
         </div>
       </section>
 
@@ -311,6 +315,31 @@ const description =
                   stroke-linejoin="round"
                   aria-hidden="true"
                 >
+                  <rect width="20" height="14" x="2" y="5" rx="2" />
+                  <line x1="2" x2="22" y1="10" y2="10" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-heading font-semibold text-content">Virement bancaire</p>
+                <p class="mt-1 text-sm text-content/60">
+                  Contactez-nous pour obtenir les coordonnées bancaires de
+                  l'association.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-card text-orange">
+                <svg
+                  class="h-6 w-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
                   <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
                   <polyline points="14 2 14 8 20 8" />
                 </svg>
@@ -346,31 +375,6 @@ const description =
                 <p class="mt-1 text-sm text-content/60">
                   En main propre lors d'un de nos événements (QJELT, permanence,
                   Capitole du Libre…).
-                </p>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-4">
-              <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-card text-orange">
-                <svg
-                  class="h-6 w-6"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <rect width="20" height="14" x="2" y="5" rx="2" />
-                  <line x1="2" x2="22" y1="10" y2="10" />
-                </svg>
-              </div>
-              <div>
-                <p class="font-heading font-semibold text-content">Virement bancaire</p>
-                <p class="mt-1 text-sm text-content/60">
-                  Contactez-nous pour obtenir les coordonnées bancaires de
-                  l'association.
                 </p>
               </div>
             </div>
