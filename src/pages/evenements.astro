@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import EventCard from "../components/EventCard.astro";
+import LiveEvents from "../components/LiveEvents.astro";
 import { events } from "../data/events";
 
 const title = "Événements — Toulibre";
@@ -102,6 +103,8 @@ const description =
 
   </article>
 
+  <LiveEvents />
+
   <script is:inline>
     (function () {
       const fallback = document.getElementById("events-fallback");
@@ -149,6 +152,21 @@ const description =
         if (title) {
           title.classList.remove("text-base");
           title.classList.add("text-xl", "md:text-2xl");
+        }
+      }
+
+      function unFeatured(card) {
+        card.classList.remove("p-6", "md:p-8");
+        card.classList.add("p-5");
+        const day = card.querySelector(".js-event-day");
+        if (day) {
+          day.classList.remove("text-xl");
+          day.classList.add("text-lg");
+        }
+        const title = card.querySelector(".js-event-title");
+        if (title) {
+          title.classList.remove("text-xl", "md:text-2xl");
+          title.classList.add("text-base");
         }
       }
 
@@ -232,6 +250,38 @@ const description =
 
       if (highlightClose) highlightClose.addEventListener("click", clearHighlight);
       bindLinks(document);
+
+      // ---- Live refresh: pull upcoming events created since the last build ----
+      if (window.ToulibreLive) {
+        const known = new Set(cards.map((c) => c.dataset.eventSlug));
+        window.ToulibreLive.fetchUpcoming().then((list) => {
+          const fresh = list.filter((ev) => !known.has(window.ToulibreLive.slugFor(ev)));
+          if (!fresh.length) return;
+          const merged = [
+            ...featuredSlot.querySelectorAll("[data-event-card]"),
+            ...otherSlot.querySelectorAll("[data-event-card]"),
+            ...fresh.map((ev) => window.ToulibreLive.buildCard(ev)),
+          ].sort(
+            (a, b) =>
+              new Date(a.dataset.eventDate).getTime() - new Date(b.dataset.eventDate).getTime()
+          );
+          featuredSlot.replaceChildren();
+          otherSlot.replaceChildren();
+          merged.forEach((card, i) => {
+            if (i === 0) {
+              applyFeatured(card);
+              featuredSlot.appendChild(card);
+            } else {
+              unFeatured(card);
+              otherSlot.appendChild(card);
+            }
+          });
+          upcomingSection.hidden = false;
+          emptyMsg.hidden = true;
+          bindLinks(featuredSlot);
+          bindLinks(otherSlot);
+        });
+      }
 
       window.addEventListener("hashchange", () => {
         const slug = decodeURIComponent(location.hash.slice(1));

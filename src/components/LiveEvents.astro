@@ -1,0 +1,168 @@
+---
+// Client-side live refresh of upcoming events.
+//
+// The static build embeds the events known at build time. To avoid having to
+// rebuild the site every time a QJeLT is created in LibreRegistration, this
+// script fetches the live JSON feed (evenements.toulibre.org/events.json) and
+// injects any upcoming event that isn't already on the page. Progressive
+// enhancement: without JS, the last build's snapshot is shown.
+//
+// window.ToulibreLive.buildCard() MUST mirror the markup of EventCard.astro so
+// live cards are visually identical to the statically rendered ones. Keep the
+// two in sync.
+const base = (
+  import.meta.env.PUBLIC_EVENTS_ICS_BASE ?? "https://evenements.toulibre.org"
+).replace(/\/+$/, "");
+---
+
+<script is:inline define:vars={{ base }}>
+  (function () {
+    var BASE = base;
+
+    function esc(s) {
+      return String(s == null ? "" : s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function slugify(value) {
+      return String(value)
+        .normalize("NFD")
+        .replace(/[̀-ͯ]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    var PARIS = { timeZone: "Europe/Paris" };
+    function parisDateKey(d) {
+      // "YYYY-MM-DD" in Europe/Paris, used for the stable slug.
+      return d.toLocaleDateString("en-CA", PARIS);
+    }
+    function slugFor(ev) {
+      return slugify(ev.title) + "-" + parisDateKey(new Date(ev.date));
+    }
+
+    var TYPE_LABELS = {
+      qjelt: "QJeLT",
+      permanence: "Permanence",
+      atelier: "Atelier",
+      projection: "Projection",
+      conference: "Conférence",
+    };
+    var TYPE_COLORS = {
+      qjelt: "bg-orange/20 text-orange",
+      permanence: "bg-orange/15 text-orange",
+      atelier: "bg-cream text-brown",
+      projection: "bg-orange/10 text-orange",
+      conference: "bg-brown/10 text-brown",
+    };
+
+    // Mirror of EventCard.astro (non-featured variant).
+    function buildCard(ev) {
+      var d = new Date(ev.date);
+      var slug = slugFor(ev);
+      var day = d.toLocaleDateString("fr-FR", Object.assign({ day: "numeric" }, PARIS));
+      var month = d
+        .toLocaleDateString("fr-FR", Object.assign({ month: "short" }, PARIS))
+        .replace(".", "");
+      var dateLong = d.toLocaleDateString(
+        "fr-FR",
+        Object.assign({ weekday: "long", day: "numeric", month: "long", year: "numeric" }, PARIS),
+      );
+      var timeShort = d.toLocaleTimeString(
+        "fr-FR",
+        Object.assign({ hour: "2-digit", minute: "2-digit" }, PARIS),
+      );
+      var when = dateLong + " à " + timeShort;
+      var typeClass = TYPE_COLORS[ev.type] || "bg-content/5 text-content";
+      var typeLabel = TYPE_LABELS[ev.type] || ev.type || "";
+
+      var urlBlock = ev.url
+        ? '<p class="mt-2"><a href="' +
+          esc(ev.url) +
+          '" target="_blank" rel="noopener noreferrer" class="font-medium text-orange underline hover:text-orange/80">Voir l’événement &rarr;</a></p>'
+        : "";
+
+      var html =
+        '<div id="' +
+        esc(slug) +
+        '" data-event-card data-event-slug="' +
+        esc(slug) +
+        '" data-event-date="' +
+        esc(ev.date) +
+        '" data-event-end-date="' +
+        esc(ev.date) +
+        '" class="event-card scroll-mt-28 rounded-2xl border border-content/10 bg-card p-5">' +
+        '<div class="flex gap-4">' +
+        '<div class="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl bg-black text-white">' +
+        '<span class="js-event-day font-heading font-bold leading-none text-lg">' +
+        esc(day) +
+        "</span>" +
+        '<span class="text-xs uppercase text-white/70">' +
+        esc(month) +
+        "</span></div>" +
+        '<div class="min-w-0 flex-1">' +
+        '<div class="mb-2 flex items-start justify-between gap-2">' +
+        '<span class="inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ' +
+        typeClass +
+        '">' +
+        esc(typeLabel) +
+        "</span>" +
+        '<span class="js-event-link-wrap relative shrink-0">' +
+        '<a href="#' +
+        esc(slug) +
+        '" class="js-event-link inline-flex h-7 w-7 items-center justify-center rounded-lg text-content/40 transition-colors hover:bg-content/5 hover:text-orange" data-event-slug="' +
+        esc(slug) +
+        '" aria-label="Mettre en avant cet événement et copier son lien" title="Copier le lien vers cet événement">' +
+        '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>' +
+        "</a>" +
+        '<span class="js-link-feedback pointer-events-none absolute right-0 top-full z-10 mt-1 whitespace-nowrap rounded-md bg-black px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-200" aria-hidden="true">Lien copié</span>' +
+        "</span></div>" +
+        '<details class="group">' +
+        '<summary class="js-event-title font-heading font-semibold text-content cursor-pointer list-none text-base">' +
+        '<h3 class="inline">' +
+        esc(ev.title) +
+        '<span class="ml-1 inline-block text-content/40 transition-transform group-open:rotate-90">&#9654;</span></h3></summary>' +
+        '<div class="mt-3 text-sm leading-relaxed text-content/70"><p>' +
+        esc(ev.description) +
+        "</p>" +
+        urlBlock +
+        "</div></details>" +
+        '<p class="mt-1 text-sm text-content/60"><time datetime="' +
+        esc(ev.date) +
+        '">' +
+        esc(when) +
+        "</time></p>" +
+        '<p class="text-sm text-content/60">' +
+        esc(ev.location) +
+        "</p></div></div></div>";
+
+      var wrap = document.createElement("div");
+      wrap.innerHTML = html;
+      return wrap.firstElementChild;
+    }
+
+    function fetchUpcoming() {
+      return fetch(BASE + "/events.json", { credentials: "omit" })
+        .then(function (r) {
+          return r.ok ? r.json() : [];
+        })
+        .then(function (list) {
+          return Array.isArray(list) ? list : [];
+        })
+        .catch(function () {
+          return [];
+        });
+    }
+
+    window.ToulibreLive = {
+      slugFor: slugFor,
+      buildCard: buildCard,
+      fetchUpcoming: fetchUpcoming,
+    };
+  })();
+</script>

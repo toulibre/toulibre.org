@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
 import EventCard from "../components/EventCard.astro";
+import LiveEvents from "../components/LiveEvents.astro";
 import ToulibreName from "../components/ToulibreName.astro";
 import Picture from "../components/Picture.astro";
 import SocialLinks from "../components/SocialLinks.astro";
@@ -250,6 +251,8 @@ const description =
     </div>
   </Section>
 
+  <LiveEvents />
+
   <script is:inline>
     (function () {
       const fallback = document.getElementById("home-events-fallback");
@@ -291,6 +294,21 @@ const description =
         }
       }
 
+      function unFeatured(card) {
+        card.classList.remove("p-6", "md:p-8");
+        card.classList.add("p-5");
+        const day = card.querySelector(".js-event-day");
+        if (day) {
+          day.classList.remove("text-xl");
+          day.classList.add("text-lg");
+        }
+        const title = card.querySelector(".js-event-title");
+        if (title) {
+          title.classList.remove("text-xl", "md:text-2xl");
+          title.classList.add("text-base");
+        }
+      }
+
       fallback.hidden = true;
       jsView.hidden = false;
 
@@ -302,6 +320,38 @@ const description =
         for (const card of next) otherSlot.appendChild(card);
       } else {
         emptyMsg.hidden = false;
+      }
+
+      // ---- Live refresh: pull upcoming events created since the last build ----
+      // The home section is a teaser: keep at most the 3 soonest upcoming.
+      if (window.ToulibreLive) {
+        const known = new Set(cards.map((c) => c.dataset.eventSlug));
+        window.ToulibreLive.fetchUpcoming().then((list) => {
+          const fresh = list.filter((ev) => !known.has(window.ToulibreLive.slugFor(ev)));
+          if (!fresh.length) return;
+          const merged = [
+            ...featuredSlot.querySelectorAll("[data-event-card]"),
+            ...otherSlot.querySelectorAll("[data-event-card]"),
+            ...fresh.map((ev) => window.ToulibreLive.buildCard(ev)),
+          ]
+            .sort(
+              (a, b) =>
+                new Date(a.dataset.eventDate).getTime() - new Date(b.dataset.eventDate).getTime()
+            )
+            .slice(0, 3);
+          featuredSlot.replaceChildren();
+          otherSlot.replaceChildren();
+          merged.forEach((card, i) => {
+            if (i === 0) {
+              applyFeatured(card);
+              featuredSlot.appendChild(card);
+            } else {
+              unFeatured(card);
+              otherSlot.appendChild(card);
+            }
+          });
+          if (merged.length) emptyMsg.hidden = true;
+        });
       }
     })();
   </script>
