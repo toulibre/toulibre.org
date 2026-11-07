@@ -1,3 +1,10 @@
 allowBuilds:
   esbuild: true
   sharp: true
+
+# @astrojs/check (via @astrojs/astro2tsx -> @napi-rs/wasm-runtime) otherwise
+# resolves @emnapi/runtime to 2.0.0-beta.x, which is incompatible with the
+# @emnapi/core 1.x it ships with and crashes with
+# "this.bridge.deleteEnv is not a function" on exit, breaking `astro check`.
+overrides:
+  "@emnapi/runtime": ^1.11.3
